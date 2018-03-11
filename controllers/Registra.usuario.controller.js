@@ -158,57 +158,57 @@
 
      function registrarUsuario() { 
        
-        //  var expreg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[`~!@#$%^&*()_°¬|+\-=?;:'",.<>\{\}\[\]\\\/])[A-Za-z\d`~!@#$%^&*()_°¬|+\-=?;:'",.<>\{\}\[\]\\\/]{8,12}$/;
-        //   if(vm.nombre1 == undefined || vm.nombre1 == '' ){
-        //        vm.mensajeNombre1   = "Debes ingresar un válido para este campo";
-        //        return;
-        //    }else if(/\s/.test(vm.nombre1)){
-        //        vm.mensajeNombre1   = "No debe llevar espacios";
-        //        return;
-        //    }else if(/\s/.test(vm.nombre2)){
-        //        vm.mensajeNombre2   = "No debe llevar espacios";
-        //        return;
-        //    }else if(vm.apellido1 == undefined || vm.apellido1 == '' ){
-        //       vm.mensajeApellido1   = "Debes ingresar un válido para este campo";
-        //       return;
-        //   }else if(/\s/.test(vm.apellido1)){
-        //        vm.mensajeApellido1   = "No debe llevar espacios";
-        //        return;
-        //   }else if(/\s/.test(vm.apellido2)){
-        //        vm.mensajeApellido2   = "No debe llevar espacios";
-        //        return;
-        //   }else if(vm.telefonoFijo == undefined || vm.telefonoFijo == ''  && (vm.telefonoMovil == undefined || vm.telefonoMovil == '') ){
-        //       vm.mensajeTelefonoFijo   = "Debes ingresar un número de teléfono para fijo o para móvil";
-        //       vm.mensajeTelefonoMovil   = "Debes ingresar un número de teléfono para fijo o para móvil";
-        //       return;
-        //   }else if(vm.email == undefined || vm.email == '' ){
-        //       vm.mensajeEmail   = "Debes ingresar un válido para este campo";
-        //       return;
-        //   }else if(!/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(vm.email)){
-        //       vm.mensajeEmail   = "El correo no es válido";
-        //       return;
-        //   }else if(vm.preguntaSeguridad == undefined || vm.preguntaSeguridad == '1' ){
-        //       vm.mensajePreguntaSeguridad   = "Debes seleccionar una pregunta ";
-        //       return;
-        //   }else if(vm.respuesta == undefined || vm.respuesta == '' ){
-        //       vm.mensajeRespuesta   = "Debes ingresar un válido para este campo";
-        //       return;
-        //   }else if(vm.contrasena == undefined || vm.contrasena == '' ){
-        //       vm.mensajeContrasena   = "Debes ingresar un válido para este campo";
-        //       return;
-        //   }else if(!expreg.test(vm.contrasena)){
-        //        vm.mensajeContrasena   = "La contraseña no cumple con las póliticas";
-        //       return;
-        //   }else if(vm.confirmarContrasena == undefined || vm.confirmarContrasena == '' ){
-        //       vm.mensajeConfirmarContrasena   = "Debes ingresar un válido para este campo";
-        //       return;
-        //   }else if(vm.confirmarContrasena !=  vm.confirmarContrasena  ){
-        //       vm.mensajeConfirmarContrasena   = "La confirmación no coincide con la contraseña";
-        //       return;
-        //   }else if(!expreg.test(vm.confirmarContrasena)){
-        //       vm.mensajeConfirmarContrasena   = "La contraseña no cumple con las póliticas";
-        //       return;
-        //   }
+          var expreg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[`~!@#$%^&*()_°¬|+\-=?;:'",.<>\{\}\[\]\\\/])[A-Za-z\d`~!@#$%^&*()_°¬|+\-=?;:'",.<>\{\}\[\]\\\/]{8,12}$/;
+           if(vm.nombre1 == undefined || vm.nombre1 == '' ){
+                vm.mensajeNombre1   = "Debes ingresar un válido para este campo";
+                return;
+           }else if(/\s/.test(vm.nombre1)){
+                vm.mensajeNombre1   = "No debe llevar espacios";
+                return;
+            }else if(/\s/.test(vm.nombre2)){
+                vm.mensajeNombre2   = "No debe llevar espacios";
+                return;
+            }else if(vm.apellido1 == undefined || vm.apellido1 == '' ){
+               vm.mensajeApellido1   = "Debes ingresar un válido para este campo";
+               return;
+           }else if(/\s/.test(vm.apellido1)){
+                vm.mensajeApellido1   = "No debe llevar espacios";
+                return;
+           }else if(/\s/.test(vm.apellido2)){
+                vm.mensajeApellido2   = "No debe llevar espacios";
+                return;
+           }else if(vm.telefonoFijo == undefined || vm.telefonoFijo == ''  && (vm.telefonoMovil == undefined || vm.telefonoMovil == '') ){
+               vm.mensajeTelefonoFijo   = "Debes ingresar un número de teléfono para fijo o para móvil";
+               vm.mensajeTelefonoMovil   = "Debes ingresar un número de teléfono para fijo o para móvil";
+               return;
+           }else if(vm.email == undefined || vm.email == '' ){
+               vm.mensajeEmail   = "Debes ingresar un válido para este campo";
+               return;
+           }else if(!/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(vm.email)){
+               vm.mensajeEmail   = "El correo no es válido";
+               return;
+           }else if(vm.preguntaSeguridad == undefined || vm.preguntaSeguridad == '1' ){
+               vm.mensajePreguntaSeguridad   = "Debes seleccionar una pregunta ";
+               return;
+           }else if(vm.respuesta == undefined || vm.respuesta == '' ){
+               vm.mensajeRespuesta   = "Debes ingresar un válido para este campo";
+               return;
+           }else if(vm.contrasena == undefined || vm.contrasena == '' ){
+               vm.mensajeContrasena   = "Debes ingresar un válido para este campo";
+               return;
+           }else if(!expreg.test(vm.contrasena)){
+                vm.mensajeContrasena   = "La contraseña no cumple con las póliticas";
+               return;
+           }else if(vm.confirmarContrasena == undefined || vm.confirmarContrasena == '' ){
+               vm.mensajeConfirmarContrasena   = "Debes ingresar un válido para este campo";
+               return;
+           }else if(vm.confirmarContrasena !=  vm.confirmarContrasena  ){
+               vm.mensajeConfirmarContrasena   = "La confirmación no coincide con la contraseña";
+               return;
+           }else if(!expreg.test(vm.confirmarContrasena)){
+               vm.mensajeConfirmarContrasena   = "La contraseña no cumple con las póliticas";
+               return;
+           }
           vm.loader = 'loaderRun';
           var requestJson = {
                     "nombre1" : vm.nombre1,
