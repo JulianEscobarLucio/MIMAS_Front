@@ -65,8 +65,9 @@ angular
             console.log(JSON.stringify(requestJson));                      
             loginServices.login(requestJson).then(function(data){
               jQuery(window).spin();  
-            if(data.resultado[0].codRespuesta == "200") {                       
-                localStorage.setItem("user", data.resultado[0].nombre1 + " " + data.resultado[0].apellido1);             
+            if(data.resultado[0].codRespuesta == "200") {   
+                var usuario = vm.usuario;                    
+                localStorage.setItem("user", vm.usuario.trim());             
                 $mdDialog.show(
                   $mdDialog.alert()
                      .parent(angular.element(document.querySelector('#dialogContainer')))
