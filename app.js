@@ -29,10 +29,13 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
         .when('/adopcion', {
             templateUrl: 'views/Adopcion.html',
             controller: 'adopcionController'
+<<<<<<< HEAD
         })        
         .when('/apadrinamiento', {
             templateUrl: 'views/apadrinamiento.html',
             controller: 'apadrinamientoController'
+=======
+>>>>>>> develop
         })
         .otherwise({
             redirectTo: '/'
