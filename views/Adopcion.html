@@ -62,11 +62,31 @@
         </div>
     </div>
     <div class="row">
-         <div class="form-group col-xs-3 col-sm-3">
-            <button type="button" class="btn btn-success" ng-click="vm.enviar()" >Enviar</button>	
+        <div class="form-group col-xs-6 col-sm-6">
+            <label >Estado</label>
+            <input type="text" class="form-control" ng-model="vm.estado" readonly>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+         <div class="form-group col-xs-3 col-stm-3">
+            <button type="button" class="btn btn-success" ng-disabled="vm.DisabledEnviar"  ng-click="vm.enviar()" >Registrar</button>	
          </div>
          <div class="form-group col-xs-3 col-sm-3">
-                <button type="button" class="btn btn-success"  ng-click="vm.limpiar()" >Limpiar</button>	
-        </div>              
+            <button type="button" class="btn btn-success" ng-disabled="vm.DisabledActualizar"   ng-click="vm.actualizar()" >Actualizar</button>	
+         </div>
+         <div class="form-group col-xs-3 col-sm-3">
+                <button type="button" class="btn btn-success"   ng-click="vm.cancelar()" >Cancelar</button>	
+        </div>
     </div> 
+    <div class="row">
+        <div class="form-group col-xs-3 col-sm-3">
+            <button type="button" class="btn btn-success" ng-disabled="vm.DisabledConsultar"  ng-click="vm.consultar()" >Consultar</button>	
+         </div> 
+         <div class="form-group col-xs-3 col-sm-3  div-consultar-adopcion">	       
+            <input type="text" class="form-control" ng-model="vm.Id" ng-Disabled="vm.idDisabled" oninput="this.value=this.value.replace(/[^0-9]/g,'');" ng-keyup="vm.functionId2()" placeholder="Identificador">
+            <p class="mensajeError"  ng-bind="vm.mensajeId"></p>	
+        </div>
+    </div>
 </div>
