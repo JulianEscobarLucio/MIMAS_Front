@@ -12,8 +12,10 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
     vm.estado = "";
     vm.consultar = consultar;
     vm.actualizar = actualizar;
+    vm.cancelar = cancelar;
     vm.enviar = enviar;
     vm.idSolicitud = "";
+    var archivo = '' ;
   
   
     vm.functionMascota = function(){
@@ -29,10 +31,15 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
     }
 
 
-    vm.limpiar = function(){
+    function cancelar(){
         vm.mascota = '';
         vm.nombreAdjunto = '';
         vm.adjunto = '';
+        vm.Id = ""; 
+        vm.idDisabled = false;
+        vm.DisabledActualizar = true;
+        vm.DisabledEnviar = false;
+        vm.DisabledConsultar = false; 
         document.getElementById("file").value = "";
         
     }
@@ -156,7 +163,7 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
                 vm.mascota = data.resultado[0].idMascota;
                 vm.nombreAdjunto = data.resultado[0].nombreAdjunto;
                 vm.estado = data.resultado[0].estado;
-                // fileReader.result =  data.resultado[0].adjunto ;
+                archivo =  data.resultado[0].adjunto ;
 
 
                 vm.Id = ""; 
@@ -190,10 +197,9 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
             return;
          }
 
-        //  if(fileReader == undefined || fileReader.result =='' ){
-        //     vm.mensajeAdjunto = "Debes adjuntar un archivo."
-        //     return;
-        //  }
+       if(fileReader != undefined && fileReader.result !='' ){
+           archivo = fileReader.result;
+        }
         
          var requestJson ={
                 'idAdopcion' : vm.idSolicitud ,
@@ -201,7 +207,7 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
                 'idMascota' : vm.mascota,
                 'nombreAdjunto' : vm.nombreAdjunto,
                 'estadoSolicitud' : vm.estado,
-                'adjunto' :'sf'
+                'adjunto' :archivo
          };
          jQuery(window).spin();
          adopcionService.actualizarSolicitud(requestJson).then(function(data){
@@ -217,8 +223,14 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
                         .ok('Cerrar')                     
                     );
                     
-                   vm.mascota = "";
-                   vm.nombreAdjunto = "";
+                   vm.mascota = '';
+                   vm.nombreAdjunto = '';
+                   vm.adjunto = '';
+                   vm.Id = ""; 
+                   vm.idDisabled = false;
+                   vm.DisabledActualizar = true;
+                   vm.DisabledEnviar = false;
+                   vm.DisabledConsultar = false; 
                    document.getElementById("file").value = "";
                   
 
