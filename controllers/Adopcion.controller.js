@@ -5,8 +5,8 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
     var vm = this;
     vm.usuario = localStorage.getItem("user");
     var archivoBase64='';
-    var extenciones = new Array( "jpg", "png", "doc", "pdf")
-    vm.extencionesPermitidas=' Extenciones permitidas: jpg, png, doc y pdf. ';
+    var extenciones = new Array("pdf")
+    vm.extencionesPermitidas=' Extenciones permitidas: pdf. ';
     vm.mensajeAdjunto = '';
     var fileReader;
     vm.estado = "";
@@ -14,8 +14,9 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
     vm.actualizar = actualizar;
     vm.cancelar = cancelar;
     vm.enviar = enviar;
+    vm.descargarPDF = descargarPDF;
     vm.idSolicitud = "";
-    var archivo = '' ;
+    vm.archivo = '' ;
   
   
     vm.functionMascota = function(){
@@ -40,6 +41,11 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
         vm.DisabledActualizar = true;
         vm.DisabledEnviar = false;
         vm.DisabledConsultar = false; 
+        vm.archivo = '';
+        vm.estado = '';
+        vm.mensajeMascota ='';
+        vm.mensajeNombreAdjunto = '';
+        vm.mensajeAdjunto = '';
         document.getElementById("file").value = "";
         
     }
@@ -99,6 +105,7 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
                 'usuario' : vm.usuario,
                 'idMascota' : vm.mascota,
                 'nombreAdjunto' : vm.nombreAdjunto,
+                'estadoSolicitud' : '1',
                 'adjunto' : fileReader.result 
          };
          jQuery(window).spin();
@@ -139,6 +146,12 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
 
     }
 
+    function descargarPDF(){
+        var dlnk = document.getElementById('dwnldLnk');
+        dlnk.href = vm.archivo;    
+        dlnk.click();
+    }
+
 
     function consultar(){
         if(vm.Id == undefined  || vm.Id  == ''){
@@ -158,13 +171,33 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
                    .ariaLabel('Solicitud consultada.')
                    .ok('Cerrar')                     
                   );
+                vm.mensajeMascota ='';
+                vm.mensajeNombreAdjunto = '';
+                vm.mensajeAdjunto = '';  
                 vm.idSolicitud = vm.Id;
                 vm.usuario = data.resultado[0].usuario;
                 vm.mascota = data.resultado[0].idMascota;
                 vm.nombreAdjunto = data.resultado[0].nombreAdjunto;
-                vm.estado = data.resultado[0].estado;
-                archivo =  data.resultado[0].adjunto ;
-
+                
+                vm.archivo =  data.resultado[0].adjunto ;
+           
+               
+                switch(data.resultado[0].estado){
+                    case "1":
+                        vm.estado = 'En proceso' ;
+                        break;
+                    case "2":
+                        vm.estado = 'Aceptado' ;
+                        break;
+                    case "3": 
+                        vm.estado = 'Rechazado' ;
+                        break;
+                    case "4": 
+                        vm.estado = 'Cacelado' ;
+                        break;    
+                    default: 
+                        vm.estado = 'En proceso' ;
+                }
 
                 vm.Id = ""; 
                 vm.idDisabled = true;
@@ -198,7 +231,7 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
          }
 
        if(fileReader != undefined && fileReader.result !='' ){
-           archivo = fileReader.result;
+           vm.archivo = fileReader.result;
         }
         
          var requestJson ={
@@ -207,7 +240,7 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
                 'idMascota' : vm.mascota,
                 'nombreAdjunto' : vm.nombreAdjunto,
                 'estadoSolicitud' : vm.estado,
-                'adjunto' :archivo
+                'adjunto' :vm.archivo
          };
          jQuery(window).spin();
          adopcionService.actualizarSolicitud(requestJson).then(function(data){
