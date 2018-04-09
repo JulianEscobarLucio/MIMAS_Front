@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <script data-require="jquery@*" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link data-require="bootstrap@3.2.0" data-semver="3.2.0" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css" />
+    <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link rel="stylesheet" type="text/css" href="assets/Menu.css">	
     <link rel="stylesheet" href="assets/Login.css">
@@ -16,6 +17,7 @@
       
     <script data-require="bootstrap@3.2.0" data-semver="3.2.0" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
     <script data-require="ng-route@1.2.0" data-semver="1.2.0" src="http://code.angularjs.org/1.2.0-rc.3/angular-route.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
@@ -32,6 +34,8 @@
     <script src="services/Usuario.service.js"></script>
     <script src="services/Login.service.js"></script>
     <script src="services/Adopcion.service.js"></script>
+    <script src="services/Solicitud.adopcion.service.js"></script>
+    <script src="services/Estado.solicitud.adopcion.service.js"></script>
 
 
     <script src="controllers/Home.publico.controller.js"></script>
@@ -41,7 +45,9 @@
     <script src="controllers/Registra.usuario.controller.js"></script>
     <script src="controllers/Usuario.controller.js"></script>
     <script src="controllers/Adopcion.controller.js"></script>
-   
+    <script src="controllers/Solicitud.adopcion.controller.js"></script>
+    <script src="controllers/Estado.solicitud.adopcion.controller.js"></script>
+    
   </head> 
   <body ng-app="mimasApp">    
        <div class="contenedor-principal" data-ng-view=""></div>   

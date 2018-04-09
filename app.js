@@ -1,4 +1,4 @@
-angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdIcons'])
+angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdIcons','ui.bootstrap'])
  
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
@@ -29,6 +29,14 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
         .when('/adopcion', {
             templateUrl: 'views/Adopcion.html',
             controller: 'adopcionController'
+        })
+        .when('/solicitud-adopcion', {
+            templateUrl: 'views/Solicitud.adopcion.html',
+            controller: 'solicitudAdopcionController'
+        })
+        .when('/estado-solicitud/:usuario', {
+            templateUrl: 'views/Estado.solicitud.adopcion.html',
+            controller: 'estadoSolicitudAdopcionController'
         })
         .otherwise({
             redirectTo: '/'
