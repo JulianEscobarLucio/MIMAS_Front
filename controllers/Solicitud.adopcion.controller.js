@@ -1,13 +1,14 @@
 angular.module('mimasApp')
 .controller('solicitudAdopcionController', solicitudAdopcionController);
 
-function solicitudAdopcionController($scope, $mdDialog, $timeout,$interval, solicitudAdopcionService) {
+function solicitudAdopcionController($scope, $location, $mdDialog, $timeout,$interval, solicitudAdopcionService) {
     var vm = this;
     vm.listarSolicitudes = listarSolicitudes;
     vm.numPages = numPages;
     vm.listaSolicitudes=[];
     listarSolicitudes();
-
+    vm.$location = $location;
+    vm.estadoSolicitud = estadoSolicitud;
 
     function listarSolicitudes(){
       solicitudAdopcionService.listarSolicitud().then(function(data){
@@ -29,5 +30,10 @@ function solicitudAdopcionController($scope, $mdDialog, $timeout,$interval, soli
       
       vm.filteredTodos = vm.listaSolicitudes.slice(begin, end);
     });
+
+    function estadoSolicitud(id){
+      debugger;
+      vm.$location.path('/estado-solicitud/'+id)
+    }
 
 }

@@ -9,6 +9,7 @@ function solicitudAdopcionService($http,$q){
     var self = this;
     var ipserver = 'http://localhost:8081'; 
     self.listarSolicitud = listarSolicitud;
+
     
     function listarSolicitud(){                
         var promesa = $q.defer();
@@ -26,5 +27,7 @@ function solicitudAdopcionService($http,$q){
             return promesa.promise      
         
     }
+
+
 
 }

@@ -74,3 +74,28 @@ box-shadow: 10px 11px 5px 0px rgba(219,210,219,1);
     padding: 0 0 0 50px !important;
 }
 
+.a-button{
+    text-decoration:none;
+    /* 
+    color: white;
+    background-color:#62c462;*/
+    /* font-weight: normal; */
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px; 
+
+    padding: 4%;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #5bb75b;
+    border-color: #51a351 #51a351 #387038;
+    border-color: rgba(0, 0, 0, 0.1) 
+}
+
+.a-button:hover{
+    text-decoration:none;
+    color: #ffffff;
+    background-color: #54d354;
+}
+
+

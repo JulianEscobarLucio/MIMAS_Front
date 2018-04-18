@@ -34,7 +34,7 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
             templateUrl: 'views/Solicitud.adopcion.html',
             controller: 'solicitudAdopcionController'
         })
-        .when('/estado-solicitud/:usuario', {
+        .when('/estado-solicitud/:idSolicitud', {
             templateUrl: 'views/Estado.solicitud.adopcion.html',
             controller: 'estadoSolicitudAdopcionController'
         })

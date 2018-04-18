@@ -1,9 +1,8 @@
 angular.module('mimasApp')
 .controller('estadoSolicitudAdopcionController', estadoSolicitudAdopcionController);
 
-function estadoSolicitudAdopcionController($scope, $mdDialog, $timeout,$interval, estadoSolicitudAdopcionService,$routeParams) {
+function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout,$interval, estadoSolicitudAdopcionService,$routeParams) {
     var vm = this;
-    vm.usuario = $routeParams.usuario;;
     var archivoBase64='';
     var extenciones = new Array("pdf")
     vm.extencionesPermitidas=' Extenciones permitidas: pdf. ';
@@ -12,47 +11,15 @@ function estadoSolicitudAdopcionController($scope, $mdDialog, $timeout,$interval
     vm.estado = "";
     vm.consultar = consultar;
     vm.actualizar = actualizar;
-    vm.cancelar = cancelar;
-    vm.enviar = enviar;
     vm.descargarPDF = descargarPDF;
-    vm.idSolicitud = "";
+    vm.idSolicitud = $routeParams.idSolicitud;
     vm.archivo = '' ;
+    vm.$location = $location;
+    vm.atras = atras;
+    consultar();
   
-  
-    vm.functionMascota = function(){
-         if(vm.mascota.length > 0){
-             vm.mensajeMascota ="";
-         }
-    }
-
-    vm.functionNombreAdjunto = function(){
-         if(vm.nombreAdjunto.length > 0){
-             vm.mensajeNombreAdjunto ="";
-           }
-    }
-
-
-    function cancelar(){
-        vm.mascota = '';
-        vm.nombreAdjunto = '';
-        vm.adjunto = '';
-        vm.Id = ""; 
-        vm.idDisabled = false;
-        vm.DisabledActualizar = true;
-        vm.DisabledEnviar = false;
-        vm.DisabledConsultar = false; 
-        vm.archivo = '';
-        vm.estado = '';
-        vm.mensajeMascota ='';
-        vm.mensajeNombreAdjunto = '';
-        vm.mensajeAdjunto = '';
-        document.getElementById("file").value = "";
-        
-    }
-
     $scope.fileChanged = function(files){
         //Read File
-        debugger;
         var selectedFile = files;
         if (selectedFile.length > 0) {
             var extension = selectedFile[0].name.split(".")[1]; 
@@ -85,66 +52,6 @@ function estadoSolicitudAdopcionController($scope, $mdDialog, $timeout,$interval
     }
         
     
-    function enviar(){
-        if(vm.mascota == undefined || vm.mascota =='' ){
-           vm.mensajeMascota = "Debes ingresar un dato valido."
-           return;
-        }
-
-        if(vm.nombreAdjunto == undefined || vm.nombreAdjunto =='' ){
-            vm.mensajeNombreAdjunto = "Debes ingresar un dato valido."
-            return;
-         }
-
-         if(fileReader == undefined || fileReader.result =='' ){
-            vm.mensajeAdjunto = "Debes adjuntar un archivo."
-            return;
-         }
-        
-         var requestJson ={
-                'usuario' : vm.usuario,
-                'idMascota' : vm.mascota,
-                'nombreAdjunto' : vm.nombreAdjunto,
-                'estadoSolicitud' : '1',
-                'adjunto' : fileReader.result 
-         };
-         jQuery(window).spin();
-         adopcionService.enviarSolicitud(requestJson).then(function(data){
-            jQuery(window).spin();
-            if(data.resultado[0].codRespuesta == "200") {     
-                   $mdDialog.show(
-                     $mdDialog.alert()
-                        .parent(angular.element(document.querySelector('#dialogContainer')))
-                        .clickOutsideToClose(true)
-                        .title('Solicitud de adopción')
-                        .textContent('Se envió la solicitud exitósamente.')
-                        .ariaLabel('Se envió la solicitud exitósamente.')
-                        .ok('Cerrar')                     
-                    );
-                    
-                   vm.mascota = "";
-                   vm.nombreAdjunto = "";
-                   document.getElementById("file").value = "";
-                  
-
-              }else if(data.resultado[0].codRespuesta == "501"){
-                     $mdDialog.show(
-                     $mdDialog.alert()
-                     .parent(angular.element(document.querySelector('#dialogContainer')))
-                     .clickOutsideToClose(true)
-                     .title('Solicitud de adopción')
-                     .textContent('La identificación de la mascota no existe, la solicitud no fue enviada.')
-                     .ariaLabel('No se envió la solicitud.')
-                     .ok('Cerrar')                     
-                    );
-
-                    vm.mascota = "";
-                    vm.nombreAdjunto = "";
-                    document.getElementById("file").value = "";
-              }         
-           });
-
-    }
 
     function descargarPDF(){
         var dlnk = document.getElementById('dwnldLnk');
@@ -154,12 +61,8 @@ function estadoSolicitudAdopcionController($scope, $mdDialog, $timeout,$interval
 
 
     function consultar(){
-        if(vm.Id == undefined  || vm.Id  == ''){
-               vm.mensajeId = "Debes ingresar un id para consultar";
-               return;
-         }
          jQuery(window).spin();
-         adopcionService.consultarSolicitud(vm.Id).then(function(data){
+         estadoSolicitudAdopcionService.consultarSolicitud(vm.idSolicitud).then(function(data){
             jQuery(window).spin();
             if(data.resultado[0].codRespuesta == "200") { 
                  $mdDialog.show(
@@ -174,31 +77,12 @@ function estadoSolicitudAdopcionController($scope, $mdDialog, $timeout,$interval
                 vm.mensajeMascota ='';
                 vm.mensajeNombreAdjunto = '';
                 vm.mensajeAdjunto = '';  
-                vm.idSolicitud = vm.Id;
                 vm.usuario = data.resultado[0].usuario;
                 vm.mascota = data.resultado[0].idMascota;
                 vm.nombreAdjunto = data.resultado[0].nombreAdjunto;
-                
+                vm.estado = data.resultado[0].estado;
                 vm.archivo =  data.resultado[0].adjunto ;
-           
-               
-                switch(data.resultado[0].estado){
-                    case "1":
-                        vm.estado = 'En proceso' ;
-                        break;
-                    case "2":
-                        vm.estado = 'Aceptado' ;
-                        break;
-                    case "3": 
-                        vm.estado = 'Rechazado' ;
-                        break;
-                    case "4": 
-                        vm.estado = 'Cacelado' ;
-                        break;    
-                    default: 
-                        vm.estado = 'En proceso' ;
-                }
-
+             
                 vm.Id = ""; 
                 vm.idDisabled = true;
                 vm.DisabledActualizar = false;
@@ -220,20 +104,6 @@ function estadoSolicitudAdopcionController($scope, $mdDialog, $timeout,$interval
     }
     
      function actualizar(){
-        if(vm.mascota == undefined || vm.mascota =='' ){
-           vm.mensajeMascota = "Debes ingresar un dato valido."
-           return;
-        }
-
-        if(vm.nombreAdjunto == undefined || vm.nombreAdjunto =='' ){
-            vm.mensajeNombreAdjunto = "Debes ingresar un dato valido."
-            return;
-         }
-
-       if(fileReader != undefined && fileReader.result !='' ){
-           vm.archivo = fileReader.result;
-        }
-        
          var requestJson ={
                 'idAdopcion' : vm.idSolicitud ,
                 'usuario' : vm.usuario,
@@ -243,7 +113,7 @@ function estadoSolicitudAdopcionController($scope, $mdDialog, $timeout,$interval
                 'adjunto' :vm.archivo
          };
          jQuery(window).spin();
-         adopcionService.actualizarSolicitud(requestJson).then(function(data){
+         estadoSolicitudAdopcionService.actualizarSolicitud(requestJson).then(function(data){
             jQuery(window).spin();
             if(data.resultado[0].codRespuesta == "200") {     
                    $mdDialog.show(
@@ -264,7 +134,6 @@ function estadoSolicitudAdopcionController($scope, $mdDialog, $timeout,$interval
                    vm.DisabledActualizar = true;
                    vm.DisabledEnviar = false;
                    vm.DisabledConsultar = false; 
-                   document.getElementById("file").value = "";
                   
 
               }else if(data.resultado[0].codRespuesta == "201"){
@@ -284,5 +153,9 @@ function estadoSolicitudAdopcionController($scope, $mdDialog, $timeout,$interval
               }         
            });
 
+    }
+
+    function atras(){;
+        vm.$location.path('/solicitud-adopcion')
     }
 }
