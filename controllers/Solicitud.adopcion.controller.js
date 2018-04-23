@@ -1,30 +1,39 @@
 angular.module('mimasApp')
 .controller('solicitudAdopcionController', solicitudAdopcionController);
 
-function solicitudAdopcionController($scope, $mdDialog, $timeout,$interval, solicituAdopcionService) {
-     var vm = this;
-    listarSolicitud();
- 
-     function listarSolicitud(){
-    //   jQuery(window).spin();
-      solicituAdopcionService.listarSolicitud().then(function(data){
-        //  jQuery(window).spin();
-         if(data.resultado[0].codRespuesta == "200") { 
-             vm.listaSolicitud = data.resultado[0].listaSolicitud;
-         }else {
-               $mdDialog.show(
-                $mdDialog.alert()
-                .parent(angular.element(document.querySelector('#dialogContainer')))
-                .clickOutsideToClose(true)
-                .title('Consultar solicitud')
-                .textContent('Solicitud no consultada.')
-                .ariaLabel('Verifique el id de la solicitud.')
-                .ok('Cerrar')                     
-               );
+function solicitudAdopcionController($scope, $location, $mdDialog, $timeout,$interval, solicitudAdopcionService) {
+    var vm = this;
+    vm.listarSolicitudes = listarSolicitudes;
+    vm.numPages = numPages;
+    vm.listaSolicitudes=[];
+    listarSolicitudes();
+    vm.$location = $location;
+    vm.estadoSolicitud = estadoSolicitud;
 
-         }            
-      });
+    function listarSolicitudes(){
+      solicitudAdopcionService.listarSolicitud().then(function(data){
+         vm.listaSolicitudes = data.resultado;  
+         vm.filteredTodos = []
+         ,vm.currentPage = 1
+         ,vm.numPerPage = 5
+         ,vm.maxSize = 5;
+        });
+    }
+    
+    function numPages() {
+      return Math.ceil(vm.listaSolicitudes.length / vm.numPerPage);
+    };
+    
+    $scope.$watch('vm.currentPage + vm.numPerPage', function() {
+      var begin = ((vm.currentPage - 1) * vm.numPerPage)
+      , end = begin + vm.numPerPage;
+      
+      vm.filteredTodos = vm.listaSolicitudes.slice(begin, end);
+    });
 
+    function estadoSolicitud(id){
+      debugger;
+      vm.$location.path('/estado-solicitud/'+id)
     }
 
 }
