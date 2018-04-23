@@ -7,14 +7,10 @@ adopcionService.$inject = ['$http','$q'];
 
 function adopcionService($http,$q){
     var self = this;
-    var ipserver = 'http://localhost:8080'; 
-    self.enviarSolicitud = enviarSolicitud;
+    var ipserver = 'http://localhost:8081';
     self.consultarSolicitud = consultarSolicitud;
-    self.actualizarSolicitud = actualizarSolicitud;
+    self.actualizarSolicitud = actualizarSolicitud; 
 
-    var self = this;
-    var ipserver = 'http://localhost:8081'; 
-    self.enviarSolicitud = enviarSolicitud;
 
     function actualizarSolicitud(auditJson){                
         var promesa = $q.defer();
