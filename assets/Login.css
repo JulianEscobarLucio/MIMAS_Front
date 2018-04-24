@@ -1,0 +1,33 @@
+.body-login{
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    height: 61% 
+}
+.botones{
+    margin-left: 13%;
+}
+.btn{
+    width: 65%;
+}
+/* .header{
+    height: 90px;
+}
+*/
+.footer{
+    height: 150px;
+    background-color: rgb(197, 195, 195);
+}
+.titulo{
+    margin-bottom: 30px;
+    color: #66af96;
+}
+a{
+    cursor: pointer;
+}
+.mensajeError {
+    font-family: sourcesanspro;
+    font-size: 14px;
+    color: #f93a0e;
+}

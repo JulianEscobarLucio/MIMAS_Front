@@ -1,0 +1,77 @@
+.body-home-publico{	
+	height: 100%;
+	width: 100%;
+	max-height: 100%;
+	background: url(gato.jpg) no-repeat fixed center top; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+}
+
+.botones{
+	margin-left: 13%;
+}
+
+.btn{
+	width: 65%;
+}
+
+
+.footer{
+	margin-top: 50%;
+	height: 50px;
+    background-color: rgb(197, 195, 195);
+}
+
+.titulo{
+	
+	margin-bottom: 30px;
+	color: #333;
+}
+
+
+
+.mensajeError {
+    font-family: sourcesanspro;
+    font-size: 14px;
+    color: #f93a0e;  
+
+}
+
+
+
+
+
+	/*
+	ESTILOS A ELEMENTOS DENTRO DEL BODY
+*/
+h1.bienvenida{
+	padding-top: 50px;
+	text-align: center;
+	font-size: 4em;
+	font-weight: bold;
+	color: #eee;
+	text-shadow: 2.5px 2.5px 3px #000;
+}
+div.logo{
+
+	height: 500px;
+	margin: auto;
+	background: url(new-logo.png) no-repeat center; 
+}
+
+div.row h1 {
+	padding-top: 50px;
+	font-size: 3em;
+	text-align: center;
+}
+
+
+.quienes {
+	padding: 0 35px;
+}
+
+
+
+
