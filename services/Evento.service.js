@@ -7,7 +7,7 @@
 
 	function registarEventoServices($http,$q){
          var self = this;
-        var ipserver = 'http://localhost:8080'; 
+        var ipserver = 'http://localhost:8081'; 
         self.registrarEvento = registrarEvento;
         self.consultarEventoServices = consultarEventoServices;
         self.actualizarEvento = actualizarEvento;

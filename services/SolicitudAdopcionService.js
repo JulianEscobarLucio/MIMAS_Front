@@ -7,7 +7,7 @@ solicituAdopcionService.$inject = ['$http','$q'];
 
 function solicituAdopcionService($http,$q){
     var self = this;
-    var ipserver = 'http://localhost:8080'; 
+    var ipserver = 'http://localhost:8081'; 
     self.listarSolicitud = listarSolicitud;
 
 
