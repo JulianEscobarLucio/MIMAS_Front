@@ -7,7 +7,7 @@ estadoSolicitudAdopcionService.$inject = ['$http','$q'];
 
 function estadoSolicitudAdopcionService($http,$q){
     var self = this;
-    var ipserver = 'http://localhost:8081'; 
+    var ipserver = 'http://localhost:8080'; 
     self.consultarSolicitud = consultarSolicitud;
     self.actualizarSolicitud = actualizarSolicitud;
 

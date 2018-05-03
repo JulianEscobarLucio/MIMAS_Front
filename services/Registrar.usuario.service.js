@@ -8,7 +8,7 @@
 
 	function registarUsuarioServices($http,$q){
          var self = this;
-        var ipserver = 'http://localhost:8081'; 
+        var ipserver = 'http://localhost:8080'; 
         self.registrarUsuario = registrarUsuario;
 
         function registrarUsuario(auditJson){                
