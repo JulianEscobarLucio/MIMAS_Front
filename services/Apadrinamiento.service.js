@@ -33,11 +33,11 @@ function apadrinamientoService($http,$q){
         
     }
 
-    function consultarSolicitud(idApadrinamiento){
+    function consultarSolicitud(idSolicitud){
         var promesa = $q.defer();
         $http.get(ipserver+"/mimas/rest/apadrinamientoservices/apadrinamiento",{
             params: {
-                id: idApadrinamiento
+                id: idSolicitud
             }  
         })
         .success(function(data){

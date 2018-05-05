@@ -62,7 +62,7 @@ function estadoSolicitudApadrinamientoController($scope,$location, $mdDialog, $t
 
     function consultar(){
          jQuery(window).spin();
-         estadoSolicitudApadrinamientoService.consultarSolicitud(vm.idApadrinamiento).then(function(data){
+         estadoSolicitudApadrinamientoService.consultarSolicitud(vm.idSolicitud).then(function(data){
             jQuery(window).spin();
             if(data.resultado[0].codRespuesta == "200") { 
                  $mdDialog.show(
@@ -105,7 +105,7 @@ function estadoSolicitudApadrinamientoController($scope,$location, $mdDialog, $t
     
      function actualizar(){
          var requestJson ={
-                'idApadrinamiento' : vm.idApadrinamiento ,
+                'idApadrinamiento' : vm.idSolicitud ,
                 'usuario' : vm.usuario,
                 'idMascota' : vm.mascota,
                 'nombreAdjunto' : vm.nombreAdjunto,
