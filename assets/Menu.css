@@ -184,7 +184,7 @@
 .gn-menu-main a {
   display: block;
   height: 100%;
-  color: #5f6f81;
+  color: #ecf0f5;;
   text-decoration: none;
   cursor: pointer;
 }
@@ -512,9 +512,15 @@ body {
   font-weight: 800;
   padding-left: 15px;
 }
-.mbottom {margin-bottom:30px;}
+.mbottom {
+  margin-bottom: 30px;
+  padding-left: 90px;
+}
 
-
+.row {
+  margin-right: -15px;
+  margin-left: -27px;
+}
 
 
 
