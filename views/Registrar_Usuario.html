@@ -1,0 +1,151 @@
+<header>
+	<a id="redirect" style="display: none;" href="../Home_Transaccional/Home_transaccional.html"></a>  
+	<div class="header">
+		<div id='cssmenu'>
+				<ul>
+						<li><a href='#/'><span>Home</span></a></li>
+						<li class='active has-sub'><a href='#'><span>Mascotas</span></a>
+								<ul>
+										<li class='has-sub'><a href='#'><span>Perdidos</span></a></li>
+										<li class='has-sub'><a href='#'><span>Encontrados</span></a></li>
+										<li class='has-sub'><a href='#'><span>En adopción</span></a></li>
+								</ul>
+						</li>
+						<li class='active has-sub'><a href='#'><span>Fundaciones</span></a>
+						<ul>
+								<li class='has-sub'><a href='#'><span>Información</span></a></li>
+								<li class='has-sub'><a href='#'><span>Miembros</span></a></li>
+								<li class='has-sub'><a href='#'><span>Donaciones</span></a></li>
+								</ul>
+						</li>
+						<li class='active has-sub'><a href='#'><span>Adopciones</span></a>
+						<ul>
+								<li class='has-sub'><a href='#'><span>Proceso y requisito</span></a></li>
+								</ul>
+						</li>
+						<li class='active has-sub'><a href='#'><span>Interés</span></a>
+						<ul>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Eventos</a></li>
+								<li><a href="#">Cuidados de animales</a></li>
+						</ul>
+						</li>
+						<li class='last'><a href='#/login'><span>Iniciar sesión</span></a></li>
+				</ul>
+		</div>
+</div> 
+</header>
+   <div class="body"  ng-controller="registrarUsuarioController as vm" id="dialogContainer" >
+         <h1 class="titulo">Registrar usuario</h1>
+   	    <div class="row">   	    	
+	   	     <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Primer nombre*</label>
+	           <input type="text" class="form-control" ng-model="vm.nombre1" maxlength="20" ng-keyup="vm.functionNombre1()">
+	           <p class="mensajeError"  ng-bind="vm.mensajeNombre1" ></p>
+	         </div>	
+	         <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Segundo nombre</label>
+	           <input type="text" class="form-control" ng-model="vm.nombre2" maxlength="20" ng-keyup="vm.functionNombre2()">
+	           <p class="mensajeError"  ng-bind="vm.mensajeNombre2" ></p>
+	         </div>
+   	    </div>
+   	    <div class="row">
+   	    	 <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Primer apellido*</label>
+	           <input type="text" class="form-control" ng-model="vm.apellido1" maxlength="20" ng-keyup="vm.functionApellido1()">
+	           <p class="mensajeError"  ng-bind="vm.mensajeApellido1" ></p>
+	         </div>
+	         <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Segundo apellido</label>
+	           <input type="text" class="form-control" ng-model="vm.apellido2" maxlength="20" ng-keyup="vm.functionApellido2()">
+	           <p class="mensajeError"  ng-bind="vm.mensajeApellido2"></p>
+	         </div>
+   	    </div>
+   	     <div class="row">
+   	    	 <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Télefono fijo</label>
+	           <input type="text" class="form-control" ng-model="vm.telefonoFijo" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="9" ng-keyup="vm.functionTelefonoFijo()" mask="999 99 99">
+	           <p class="mensajeError"  ng-bind="vm.mensajeTelefonoFijo"></p>
+	         </div>
+	         <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Télefono movil</label>
+	           <input type="text"  ng-keyup="vm.functionTelefonoMovil()" class="form-control" ng-model="vm.telefonoMovil" oninput="this.value=this.value.replace(/[^0-9]/g,'');"  maxlength="13"  mask="999 999 99 99">
+	             <p class="mensajeError"  ng-bind="vm.mensajeTelefonoMovil"></p>
+	         </div>
+   	    </div>
+   	    <div class="row">
+   	    	 <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Correo electrónico*</label>
+	           <input type="text" class="form-control" ng-model="vm.email" maxlength="30" ng-keyup="vm.functionEmail()">
+	           <p class="mensajeError"  ng-bind="vm.mensajeEmail"></p>	        
+	         </div>	         
+   	    </div>
+   	    <div class="row">
+   	    	 <div class="form-group col-xs-6 col-sm-6">
+	            <label for="usr">Pregunta de seguridad*</label>
+                <select class="form-control" ng-model="vm.preguntaSeguridad" ng-change="vm.functionPreguntaSeguridad()">
+                  <option value="1" ng-selected="true">Seleccione una pregunta...</option>
+                  <option value="2">¿Cuál es su comida favorita?</option>
+                  <option value="3">¿Cuál es el segundo nombre de su padre?</option>
+                  <option value="4">¿Cuál es su Canción preferida?</option>          
+                  <option value="5">¿Cuál es el nombre de su mascota?</option>	
+                </select>	         
+	            <p class="mensajeError"  ng-bind="vm.mensajePreguntaSeguridad"></p>	         
+	         </div>
+	         <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Respuesta*</label>
+	           <input type="text" class="form-control" ng-model="vm.respuesta" maxlength="30" ng-keyup="vm.functionRespuesta()">
+	            <p class="mensajeError"  ng-bind="vm.mensajeRespuesta"></p>         
+	         </div>
+   	    </div>
+   	    <div class="row">
+   	       <md-button class="md-fab">
+   	         <ng-md-icon icon="info_outline" size="42" class="iconinfo" ></ng-md-icon>
+            <md-tooltip  md-direction="top">            
+               <p>Tu contraseña debe tener entre 8 y 12 caracteres. Debe contener al menos una letra en mayúscula y una minuscula. Debe tener al menos un número del 0 al 9 y caracteres especiales.<br></p>
+            </md-tooltip>            
+          </md-button>   	    	
+   	    </div>
+   	     <div class="row">
+   	    	 <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Contraseña*</label>
+	           <input type="password" class="form-control" ng-model="vm.contrasena" maxlength="20" ng-keyup="vm.functionContrasena()">
+	            <p class="mensajeError"  ng-bind="vm.mensajeContrasena"></p>	       
+	         </div>
+	         <div class="form-group col-xs-6 col-sm-6">
+	           <label for="usr">Confirmar Contraseña*</label>
+	           <input type="password" class="form-control" ng-model="vm.confirmarContrasena" maxlength="20" ng-keyup="vm.functionConfirmarContrasena()">
+	           <p class="mensajeError"  ng-bind="vm.mensajeConfirmarContrasena"></p>	          
+	         </div>
+   	    </div>
+   	    <div class="row botones">
+   	    	 <div class="form-group col-xs-6 col-sm-6">
+	           <button type="button" class="btn btn-success">Cancelar</button>
+	         </div>
+	         <div class="form-group col-xs-6 col-sm-6">
+	            <button type="button" class="btn btn-success" ng-click="vm.registrarUsuario()">Aceptar</button>
+	         </div>
+				 </div>
+        <md-content>       
+          
+            <div ng-if="status">
+               <br/>
+               <b layout="row" layout-align="center center" class="md-padding">
+                  {{status}}
+               </b>
+            </div>
+         </md-content>   
+       </div>
+<!-- inicio  barra social -->
+	<div class="social">
+		<ul>
+			<li><a href="http://www.facebook.com/" target="_blank" class="icon-facebook2"></a></li>
+			<li><a href="http://www.twitter.com/" target="_blank" class="icon-twitter"></a></li>
+			<li><a href="https://plus.google.com/" target="_blank" class="icon-google-plus2"></a></li>
+			<li><a href="#" class="icon-mail"></a></li>
+		</ul>
+	</div> <!-- fin  barra social -->
+   <footer>
+   	<div class="footer"></div>
+   </footer> 
+
