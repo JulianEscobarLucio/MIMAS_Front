@@ -7,12 +7,18 @@ apadrinamientoService.$inject = ['$http','$q'];
 
 function apadrinamientoService($http,$q){
     var self = this;
+    var ipserver = 'http://localhost:8080'; 
+    self.enviarSolicitud = enviarSolicitud;
+    self.consultarSolicitud = consultarSolicitud;
+    self.actualizarSolicitud = actualizarSolicitud;
+
+    var self = this;
     var ipserver = 'http://localhost:8081'; 
     self.enviarSolicitud = enviarSolicitud;
 
-    function enviarSolicitud(auditJson){                
+    function actualizarSolicitud(auditJson){                
         var promesa = $q.defer();
-        $http.post(ipserver+"/mimas/rest/apadrinamientoservices/apadrinamiento",auditJson)
+        $http.put(ipserver+"/mimas/rest/apadrinamientoservices/apadrinamiento",auditJson)
             .success(function(data){
                 promesa.resolve({
                     resultado:data
@@ -25,6 +31,26 @@ function apadrinamientoService($http,$q){
             })
             return promesa.promise      
         
+    }
+
+    function consultarSolicitud(idSolicitud){
+        var promesa = $q.defer();
+        $http.get(ipserver+"/mimas/rest/apadrinamientoservices/apadrinamiento",{
+            params: {
+                id: idSolicitud
+            }  
+        })
+        .success(function(data){
+            promesa.resolve({
+                resultado:data
+            })
+        })
+        .error(function(err){
+            promesa.resolve({
+                resultado:err
+            })
+        })
+        return promesa.promise   
     }
 
 }

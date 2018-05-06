@@ -38,6 +38,26 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
             templateUrl: 'views/SoliciudesAdopcion.html',
             controller: 'solicitudAdopcionController'
         })
+        .when('/solicitud-adopcion', {
+            templateUrl: 'views/Solicitud.adopcion.html',
+            controller: 'solicitudAdopcionController'
+        })
+        .when('/solicitudes-apadrinamiento', {
+            templateUrl: 'views/SoliciudesApadrinamiento.html',
+            controller: 'solicitudApadrinamientoController'
+        })
+        .when('/solicitud-apadrinamiento', {
+            templateUrl: 'views/Solicitud.apadrinamiento.html',
+            controller: 'solicitudAdopcionController'
+        })
+        .when('/estado-solicitud/:idSolicitud', {
+            templateUrl: 'views/Estado.solicitud.adopcion.html',
+            controller: 'estadoSolicitudAdopcionController'
+        })
+        .when('/estado-solicitudA/:idSolicitud', {
+            templateUrl: 'views/Estado.solicitud.apadrinamiento.html',
+            controller: 'estadoSolicitudApadrinamientoController'
+        })
         .otherwise({
             redirectTo: '/'
         });

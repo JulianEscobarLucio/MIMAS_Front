@@ -7,27 +7,14 @@ adopcionService.$inject = ['$http','$q'];
 
 function adopcionService($http,$q){
     var self = this;
-    var ipserver = 'http://localhost:8081'; 
+    var ipserver = 'http://localhost:8080'; 
     self.enviarSolicitud = enviarSolicitud;
     self.consultarSolicitud = consultarSolicitud;
     self.actualizarSolicitud = actualizarSolicitud;
 
-    function enviarSolicitud(auditJson){                
-        var promesa = $q.defer();
-        $http.post(ipserver+"/mimas/rest/adopcionservices/adopcion",auditJson)
-            .success(function(data){
-                promesa.resolve({
-                    resultado:data
-                })
-            })
-            .error(function(err){
-                promesa.resolve({
-                    resultado:err
-                })
-            })
-            return promesa.promise      
-        
-    }
+    var self = this;
+    var ipserver = 'http://localhost:8081'; 
+    self.enviarSolicitud = enviarSolicitud;
 
     function actualizarSolicitud(auditJson){                
         var promesa = $q.defer();

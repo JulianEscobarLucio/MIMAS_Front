@@ -1,11 +1,11 @@
 angular
 .module('mimasApp')
-.service('solicituAdopcionService',solicituAdopcionService);
+.service('solicituApadrinamientoService',solicituApadrinamientoService);
 
 
-solicituAdopcionService.$inject = ['$http','$q'];
+solicituApadrinamientoService.$inject = ['$http','$q'];
 
-function solicituAdopcionService($http,$q){
+function solicituApadrinamientoService($http,$q){
     var self = this;
     var ipserver = 'http://localhost:8080'; 
     self.listarSolicitud = listarSolicitud;
@@ -13,7 +13,7 @@ function solicituAdopcionService($http,$q){
 
     function listarSolicitud(){
         var promesa = $q.defer();
-        $http.get(ipserver+"/mimas/rest/adopcionservices/list-adopcion")
+        $http.get(ipserver+"/mimas/rest/apadrinamientoservices/list-apadrinamiento")
         .success(function(data){
             promesa.resolve({
                 resultado:data

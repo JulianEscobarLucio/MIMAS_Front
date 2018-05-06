@@ -1,7 +1,7 @@
 angular.module('mimasApp')
-.controller('solicitudAdopcionController', solicitudAdopcionController);
+.controller('solicitudApadrinamientoController', solicitudApadrinamientoController);
 
-function solicitudAdopcionController($scope, $location, $mdDialog, $timeout,$interval, solicitudAdopcionService) {
+function solicitudApadrinamientoController($scope, $location, $mdDialog, $timeout,$interval, solicitudApadrinamientoService) {
     var vm = this;
     vm.listarSolicitudes = listarSolicitudes;
     vm.numPages = numPages;
@@ -11,7 +11,7 @@ function solicitudAdopcionController($scope, $location, $mdDialog, $timeout,$int
     vm.estadoSolicitud = estadoSolicitud;
 
     function listarSolicitudes(){
-      solicitudAdopcionService.listarSolicitud().then(function(data){
+      solicitudApadrinamientoService.listarSolicitud().then(function(data){
          vm.listaSolicitudes = data.resultado;  
          vm.filteredTodos = []
          ,vm.currentPage = 1
@@ -33,7 +33,7 @@ function solicitudAdopcionController($scope, $location, $mdDialog, $timeout,$int
 
     function estadoSolicitud(id){
       debugger;
-      vm.$location.path('/estado-solicitud/'+id)
+      vm.$location.path('/estado-solicitudA/'+id)
     }
 
 }
