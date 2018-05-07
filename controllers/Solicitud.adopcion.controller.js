@@ -32,7 +32,6 @@ function solicitudAdopcionController($scope, $location, $mdDialog, $timeout,$int
     });
 
     function estadoSolicitud(id){
-      debugger;
       vm.$location.path('/estado-solicitud/'+id)
     }
 

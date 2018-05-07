@@ -1,42 +1,43 @@
     <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
 
-<div class="header">
-    <div id='cssmenu'>
-        <ul>
-            <li class='active has-sub'><a href='#'><span>Adoptar o apadrinar</span></a>
+    <div class="header">
+        <div id='cssmenu'>
+            <ul>
+                <li class='active has-sub'><a href='#'><span>Adoptar o apadrinar</span></a>
+                    <ul>
+                        <li class='has-sub'><a href='#/adopcion'><span>Adoptar</span></a></li>
+                        <li class='has-sub'><a href='#/apadrinamiento'><span>Apadrinar</span></a></li>
+                        <li class='has-sub'><a href='#/solicitud-adopcion'><span>Solicitudes de adopción</span></a></li>
+                        <li class='has-sub'><a href='#/solicitud-apadrinamiento'><span>Solicitudes de apadrinamiento</span></a></li>
+                    </ul>
+                </li>
+                <li class='active has-sub'><a href='#'><span>Mi perfil</span></a>
+                </li>
+                <li class='active has-sub'><a href='#'><span>Mis mascotas</span></a>
                 <ul>
-                    <li class='has-sub'><a href='#/adopcion'><span>Adoptar</span></a></li>
-                    <li class='has-sub'><a href='#'><span>Apadrinar</span></a></li>
-					<li class='has-sub'><a href='#/solicitud-adopcion'><span>Solicitudes de adopción</span></a></li>
+                    <li class='has-sub'><a href='#/mascota'><span>Gestionar mascota</span></a></li>
+                    </ul>
+                </li>
+                <li class='active has-sub'><a href='../Fundaciones/Fundacion.html'><span>Fundaciones</span></a>
+                <ul>
+                    <li><a href="#/adopcion">Adopciones</a></li>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Colaboradores</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Donaciones</a></li>
+                    <li><a href="#">Reportes y estadisticas</a></li>
                 </ul>
-            </li>
-            <li class='active has-sub'><a href='#'><span>Mi perfil</span></a>
-            </li>
-            <li class='active has-sub'><a href='#'><span>Mis mascotas</span></a>
-            <ul>
-                <li class='has-sub'><a href='#/mascota'><span>Gestionar mascota</span></a></li>
+                </li>
+                <li class='active has-sub'><a href='#'><span>Administración</span></a>
+                <ul>
+                    <li><a href="../Roles/Rol.html">Roles</a></li>
+                    <li><a href="#/usuario">Usuarios</a></li>
                 </ul>
-            </li>
-            <li class='active has-sub'><a href='../Fundaciones/Fundacion.html'><span>Fundaciones</span></a>
-            <ul>
-                <li><a href="#">Adopciones</a></li>
-                <li><a href="#">Eventos</a></li>
-                <li><a href="#">Colaboradores</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Donaciones</a></li>
-                <li><a href="#">Reportes y estadisticas</a></li>
+                </li>
+                <li class='active has-sub'><a href='#/'><span>Salir</span></a></li>
             </ul>
-            </li>
-            <li class='active has-sub'><a href='#'><span>Administración</span></a>
-            <ul>
-                <li><a href="../Roles/Rol.html">Roles</a></li>
-                <li><a href="#/usuario">Usuarios</a></li>
-            </ul>
-            </li>
-            <li class='active has-sub'><a href='#/'><span>Salir</span></a></li>
-        </ul>
+        </div>
     </div>
-</div>
 <div class="body"  ng-controller="solicitudAdopcionController as vm" >
     <h1 class="titulo">Solicitudes de adopción</h1>
     <div class="row">  

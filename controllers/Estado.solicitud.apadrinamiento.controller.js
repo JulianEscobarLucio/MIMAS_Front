@@ -65,15 +65,6 @@ function estadoSolicitudApadrinamientoController($scope,$location, $mdDialog, $t
          estadoSolicitudApadrinamientoService.consultarSolicitud(vm.idSolicitud).then(function(data){
             jQuery(window).spin();
             if(data.resultado[0].codRespuesta == "200") { 
-                 $mdDialog.show(
-                   $mdDialog.alert()
-                   .parent(angular.element(document.querySelector('#dialogContainer')))
-                   .clickOutsideToClose(true)
-                   .title('Consultar solicitud')
-                   .textContent('Solicitud consultada.')
-                   .ariaLabel('Solicitud consultada.')
-                   .ok('Cerrar')                     
-                  );
                 vm.mensajeMascota ='';
                 vm.mensajeNombreAdjunto = '';
                 vm.mensajeAdjunto = '';  

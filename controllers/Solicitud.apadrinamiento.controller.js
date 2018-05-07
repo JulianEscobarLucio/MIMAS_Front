@@ -32,7 +32,6 @@ function solicitudApadrinamientoController($scope, $location, $mdDialog, $timeou
     });
 
     function estadoSolicitud(id){
-      debugger;
       vm.$location.path('/estado-solicitudA/'+id)
     }
 
