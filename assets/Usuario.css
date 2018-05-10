@@ -13,7 +13,7 @@
 
 
 .header{
-	height: 90px;
+	height: 10px;
     
 }
 
@@ -24,8 +24,8 @@
 
 .titulo{
 	
-	margin-bottom: 30px;
-	color: #66af96;
+	margin-bottom: 70px;
+	color: transparent;
 }
 
 
@@ -72,7 +72,7 @@
 
  .md-fab{
   	    margin-left: 45% !important;
-  	    background-color: #66af96 !important;
+  	    background-color: transparent !important;
         width: 40px !important;
         height: 40px !important;
   }
