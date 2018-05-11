@@ -1,17 +1,16 @@
 	angular
 		.module('mimasApp')
 		.service('loginServices',loginServices);
-	loginServices.$inject = ['$http','$q'];
-	function loginServices($http,$q){
+	loginServices.$inject = ['$http','$q','CONFIG'];
+	function loginServices($http,$q,CONFIG){
         var self = this;
-        var ipserver = 'http://localhost:8081'; 
         self.login = login;
         self.consultarUsuario = consultarUsuario;
 
         function login(auditJson){                
             var promesa = $q.defer();
             debugger;
-            $http.post(ipserver+"/mimas/rest/securityServices/login"
+            $http.post(CONFIG.APIURL+"securityServices/login"
                         ,auditJson)
                 .success(function(data){
                     promesa.resolve({
@@ -30,7 +29,7 @@
     function consultarUsuario(auditJson){
             debugger;                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/usuarioServices/consultarUsuario",auditJson)
+            $http.post(CONFIG.APIURL+"usuarioServices/consultarUsuario",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data

@@ -3,16 +3,15 @@ angular
 .service('apadrinamientoService',apadrinamientoService);
 
 
-apadrinamientoService.$inject = ['$http','$q'];
+apadrinamientoService.$inject = ['$http','$q','CONFIG'];
 
-function apadrinamientoService($http,$q){
+function apadrinamientoService($http,$q,CONFIG){
     var self = this;
-    var ipserver = 'http://localhost:8080'; 
     self.enviarSolicitud = enviarSolicitud;
 
     function enviarSolicitud(auditJson){                
         var promesa = $q.defer();
-        $http.post(ipserver+"/mimas/rest/apadrinamientoservices/apadrinamiento",auditJson)
+        $http.post(CONFIG.APIURL+"apadrinamientoservices/apadrinamiento",auditJson)
             .success(function(data){
                 promesa.resolve({
                     resultado:data

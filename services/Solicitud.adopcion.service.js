@@ -3,17 +3,16 @@ angular
 .service('solicitudAdopcionService',solicitudAdopcionService);
 
 
-solicitudAdopcionService.$inject = ['$http','$q'];
+solicitudAdopcionService.$inject = ['$http','$q','CONFIG'];
 
-function solicitudAdopcionService($http,$q){
+function solicitudAdopcionService($http,$q,CONFIG){
     var self = this;
-    var ipserver = 'http://localhost:8081'; 
     self.listarSolicitud = listarSolicitud;
 
     
     function listarSolicitud(){                
         var promesa = $q.defer();
-        $http.get(ipserver+"/mimas/rest/adopcionservices/list-adopcion")
+        $http.get(CONFIG.APIURL+"adopcionservices/list-adopcion")
             .success(function(data){
                 promesa.resolve({
                     resultado:data
