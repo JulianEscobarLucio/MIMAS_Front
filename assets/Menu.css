@@ -235,7 +235,7 @@
 .gn-menu-main, .gn-menu-main ul {
   margin: 0;
   padding: 0;
-  background-color: #3531301f;
+  background-color: #35313040;
   color: #5f6f81;
   list-style: none;
   text-transform: none;
@@ -464,9 +464,9 @@ body {
 
 
 
-.hizli-menu {
+/* .hizli-menu {
   padding-bottom: 50px;
-}
+} */
 
 .hizli-menu .hizli-menu-ic .btn-group {
   background: #24aad2;

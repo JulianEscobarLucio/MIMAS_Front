@@ -166,14 +166,16 @@ hr.star-primary {
 
 hr.star-primary:after {
     color: #2c3e50;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 section.primary h2{    
     color: #2c3e50;
-    }
+}
     
-
+.col-sm-offset-1 {
+    margin-left: 0%;
+}
     
 section.success{
     background-color: #18bc9c;
@@ -189,11 +191,12 @@ section.success{
     .navbar-default {
         background-color: #00000008;
         border-color: #e7e7e7;
-        border-color: #e7e7e705;
+        border-color: #e7e7e700;
     } 
     
     
+    
 
 
-
+   
   
