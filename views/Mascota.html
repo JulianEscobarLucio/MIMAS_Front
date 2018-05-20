@@ -155,7 +155,6 @@
 	         </div>
    	    </div>
    	    <div class="row">   	    	
-	     
 	         <div class="form-group col-xs-6 col-sm-6">
 	           <label for="usr">Estado de Salud*</label>
 	           <input type="text" class="form-control" ng-model="vm.EstadoSalud" ng-keyup="vm.functionEstadoSalud()" oninput="this.value=this.value.replace(/[^a-zA-Z]/g,'');">
@@ -163,27 +162,27 @@
 	         </div>
    	    </div>		 
    	    <br>
-   	    <div class="row botones">
+   	    <div class="row">
    	    	 <div class="form-group col-xs-3 col-sm-3">
 	           <button type="button" class="btn btn-success" ng-disabled="vm.registrarDisabled"  ng-click="vm.registrar()">Registrar</button>
 	         </div>
 	         <div class="form-group col-xs-3 col-sm-3">
-	            <button type="button" class="btn btn-info" ng-disabled="vm.consultarDisabled" ng-click="vm.consultar()">Consultar</button>
+	            <button type="button" class="btn btn-success" ng-disabled="vm.consultarDisabled" ng-click="vm.consultar()">Consultar</button>
 	         </div>
 	         <div class="form-group col-xs-3 col-sm-3  identificacion">	       
 	              <input type="text" class="form-control" ng-model="vm.Id2" ng-Disabled="vm.idDisabled" oninput="this.value=this.value.replace(/[^0-9]/g,'');" ng-keyup="vm.functionId2()" placeholder="Identificador">
 	           <p class="mensajeError"  ng-bind="vm.mensajeId2"></p>	
 	         </div>
 	         <div class="form-group col-xs-3 col-sm-3">
-		            <button type="button" class="btn btn-primary" ng-disabled="vm.actualizarDisabled" ng-click="vm.actualizar()">Actualizar</button>
+		            <button type="button" class="btn btn-success" ng-disabled="vm.actualizarDisabled" ng-click="vm.actualizar()">Actualizar</button>
 	         </div>
    	    </div>
-   	    <div class="row botones">
+   	    <div class="row">
    	       	  <div class="form-group col-xs-3 col-sm-3">
-	            <button type="button" class="btn btn-danger" ng-disabled="vm.eliminarDisabled" ng-click="vm.showConfirm($event)">Eliminar</button>
+	            <button type="button" class="btn btn-success" ng-disabled="vm.eliminarDisabled" ng-click="vm.showConfirm($event)">Eliminar</button>
 	         </div> 
 	          <div class="form-group col-xs-3 col-sm-3">
-	            <button type="button" class="btn btn-warning" ng-disabled="vm.DisabledCancelar" ng-click="vm.cancelar()">Cancelar</button>
+	            <button type="button" class="btn btn-success" ng-disabled="vm.DisabledCancelar" ng-click="vm.cancelar()">Cancelar</button>
 	         </div>   	    	
    	    </div>   	 
         <md-content>       

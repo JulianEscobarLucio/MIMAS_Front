@@ -110,7 +110,6 @@
         
         vm.Id2 = "";
         vm.nombre = "";
-        vm.IdResponsable  = "";
         vm.Especie = "";
         vm.Raza = "";
         vm.Genero = "";   

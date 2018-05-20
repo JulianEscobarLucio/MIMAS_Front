@@ -72,6 +72,22 @@ div.row h1 {
 	padding: 0 35px;
 }
 
+.lista-mascota{
+	padding-left: 27px;
+}
 
+.item-lista-mascota{
+	background-color: white;
+	color: black;	
+	margin-right: 25px;
+	padding: 30px;
+	margin-bottom: 25px;
+	height: 288px;
+	width: 18%;
+}
+
+.row {
+	margin-left: 0!important;
+}
 
 

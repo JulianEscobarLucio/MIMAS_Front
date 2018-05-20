@@ -1,3 +1,4 @@
+<link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
 <div class="header">
     <div id='cssmenu'>
         <ul>
@@ -44,6 +45,19 @@
           </div>
           <!-- fin row-->
        </div>
+       <!--Lista de mascotas-->
+       <div class="row lista-mascota">
+           <di ng-repeat="mascota in vm.filteredTodos" class="col-md-2 item-lista-mascota">
+               <img ng-src="{{ mascota.imagen }}" width="170px" height="150"  /><br/> 
+               <span>Nombre: </span>{{mascota.nombre}}<br/> 
+               <span>Edad: </span><br/>
+               <span>Estado: </span>{{mascota.estado}}<br/> <br/> 
+               <button type="button" class="btn btn-success"   ng-click="vm.cancelar()" >Adoptar</button>	
+           </di>
+        </div><br/>
+        <div data-pagination="" data-num-pages="vm.numPages()" 
+        data-current-page="vm.currentPage" data-max-size="vm.maxSize"  
+        data-boundary-links="true"></div>   
        <!-- fin container -->
        <div class="container-fluid">
           <div class="row">
