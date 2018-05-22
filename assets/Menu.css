@@ -415,6 +415,63 @@ input.gn-search::placeholder {
   height: 60px;
 }
 
+
+
+
+.containers > header,
+.codrops-top {
+  color: rgb(31, 62, 109);
+  font-family: 'Lato', Arial, sans-serif;
+}
+
+.containers > header {
+  margin: 0 auto;
+  padding: 12em 2em;
+  padding-left: 500px;
+  background: url(logo.jpg) no-repeat center;
+}
+
+.containers > header a { 
+  color: #566473;
+  text-decoration: none;
+  outline: none;
+}
+
+.containers > header a:hover {
+  color: #4f7bab;
+}
+
+.containers > header h1 {
+  font-size: 3.2em;
+  line-height: 1.3;
+  margin: 0;
+  font-weight: 300;
+}
+
+.containers {
+    width: 300px;
+}
+
+.containers > header span {
+  display: block;
+  font-size: 55%;
+  color: #74818e;
+  padding: 0 0 0.6em 0.1em;
+}
+
+
+
+
+.navbar-brand {
+  float: left;
+  height: 50px;
+  font-size: 18px;
+  padding: 0px 50px 10px;
+  line-height: 20px;
+}
+
+
+
 .container > header,
 .codrops-top {
   color: rgb(31, 62, 109);
@@ -610,7 +667,9 @@ h1{
     margin:20px 0px;
 }
 
-
+.navbar-default .navbar-nav > li > a {
+  color: #252444;
+}
 
 s
 
