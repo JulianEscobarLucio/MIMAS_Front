@@ -183,11 +183,11 @@ section.primary h2{
     
 section.success{
     background-color: #b9d2f000;;
-    color: #fff;
+    color: #9d8e8e;
     }
 
     section.successs{
-        background-color: #d9e3ef;
+        background-color: #1d4754;
         color: #fff;
         }
 
@@ -202,7 +202,7 @@ section.success{
 
     @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
-body {padding-top:50px;}
+body {padding-top:0px;}
 
 .box {
     border-radius: 3px;
@@ -388,3 +388,7 @@ body {padding-top:50px;}
   .timeline-body {
       display: none;
   }
+
+
+
+/* PIE DE PAGINA */

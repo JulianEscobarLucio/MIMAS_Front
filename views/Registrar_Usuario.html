@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon.ico">
 
-	<title>Material Bootstrap Wizard by Creative Tim</title>
+	<title></title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -31,11 +31,11 @@
 
 
 
-<body >
+<body style="padding-top: 100px">
 	
 	
 	
-	    <div class="image-container set-full-height" style="background-image: url('assets/images.jpg')">
+	    <div class="image-container set-full-height" style="background-color: rgb(123, 180, 180)">
 
 		<!--  Made With Material Kit  -->
 		<a href="http://demos.creative-tim.com/material-kit/index.html?ref=material-bootstrap-wizard" class="made-with-mk">
@@ -44,84 +44,31 @@
 		</a>
 
 		<a id="redirect" style="display: none;" href="../Home_Transaccional/Home_transaccional.html"></a>
-<div class="container">
+<!--  <div class="container">
 		<ul id="gn-menu" class="gn-menu-main">
-		  <li class="gn-trigger">
-			<a class="gn-icon gn-icon-menu"></a>
-			<nav class="gn-menu-wrapper">
-			  <div class="gn-scroller">
-				<ul class="gn-menu">
-				  <!-- <li>
-					<input placeholder="Buscar" type="search" class="gn-search">
-	  
-					<a class="gn-icon gn-icon-search" href='#'>
-					  <span>Buscar</span>
-					</a>
-				  </li> -->
-				  <li>
-					<a class="gn-icon gn-icon-Informacion">Información</a>
-	  
-				  </li>
-				  <li>
-					<a class="gn-icon gn-icon-miembros">Miembros</a>
-				  </li>
-				  <li>
-					<a class="gn-icon gn-icon-donaciones">Donaciones</a>
-				  </li>
-				  <li>
-					<a class="gn-icon gn-icon-Galeria">Galería</a>
-	  
-				  </li>
-				  <li>
-					  <a class="gn-icon gn-icon-Galeria">Galería</a>
 		
-					</li>
-					<li>
-						<a class="gn-icon gn-icon-Galeria">Mascotas</a>
-		  
-					  </li>
-					  <li>
-						  <a class="gn-icon gn-icon-Galeria">Fundaciones</a>
-			
-						</li>
-						<li>
-							<a class="gn-icon gn-icon-Galeria">Adopciones</a>
-			  
-						  </li>
-						  <li>
-							  <a class="gn-icon gn-icon-Galeria">Apadrinamiento</a>
-				
-							</li>
-	  
-			  
-		  </li>
-		</ul>
-		</div>
-		<!-- /gn-scroller -->
-		</nav>
-		</li>
 		<li>
-			<a href='#/' class=""><img src="assets/logito.png"></a>
+			<a href='#/' class=""><img src="assets/logos.png"></a>
 	  
-		  </li>
+		  </li> -->
 	   
 	   
 		  
 		  
 		  
 	  
-	  
+<!-- 	  
 		<li class='last'>
 		  <a href='#/login'>
 			<span>
-			  <img src="assets/usuario.png">
+			  
 			</span>
 		  </a>
 		</li>
 		</li>
 		</ul>
 		
-	  </div>
+	  </div>  -->
 
 	    <!--   Big container   -->
 	    <div class="container">
@@ -151,56 +98,54 @@
 		                            <div class="tab-pane" id="about">
 		                              <div class="row">
 		                                	
-		                                	<div class="col-sm-4 col-sm-offset-1">
-		                                    	<div class="picture-container">
-		                                        	<div class="picture">
-                                        				<img src="assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
-		                                            	<input type="file" id="wizard-picture">
-		                                        	</div>
-		                                        	<h6>Choose Picture</h6>
-												</div>
+		                                	<div class="col-sm-5 col-sm-offset-1">
+		                                    	
 												<div class="input-group">
 														<span class="input-group-addon">
 															<i class="material-icons">face</i>
 														</span>
 														<div class="form-group label-floating">
-														  <label class="control-label">Primer nombre <small>(required)</small></label>
-														  <input name="firstname" type="text" class="form-control" ng-model="vm.nombre1" ng-keyup="vm.functionNombre1()">
+														  <label class="control-label">Primer nombre <small>(requerido)</small></label>
+														  <input name="firstname" type="text" class="form-control" ng-model="vm.nombre1" maxlength="20" ng-keyup="vm.functionNombre1()">
 														  <p class="mensajeError"  ng-bind="vm.mensajeNombre1" ></p>
 														</div>
 													</div>
 													<div class="input-group">
 															<span class="input-group-addon">
+																<i class="material-icons">record_voice_over</i>
+															</span>
+															<div class="form-group label-floating">
+															  <label class="control-label">Primer apellido <small>(requerido)</small></label>
+															  <input name="lastname" type="text" class="form-control" ng-model="vm.apellido1"maxlength="20"  ng-keyup="vm.functionApellido1()">
+															  <p  class="mensajeError"  ng-bind="vm.mensajeApellido1" ></p>
+															 
+															</div>
+														</div>
+													
+		                                	</div>
+		                                	<div class="col-sm-5">
+												
+
+												
+													<div class="input-group">
+															<span class="input-group-addon">
 																<i class="material-icons">face</i>
 															</span>
 															<div class="form-group label-floating">
-															  <label class="control-label">Segundo nombre <small>(required)</small></label>
-															  <input name="firstname" type="text" class="form-control" ng-model="vm.nombre2" ng-keyup="vm.functionNombre2()">
+															  <label class="control-label">Segundo nombre <small>(requerido)</small></label>
+															  <input name="firstname" type="text" class="form-control" ng-model="vm.nombre2"maxlength="20"  ng-keyup="vm.functionNombre2()">
 															  <p class="mensajeError"  ng-bind="vm.mensajeNombre2" ></p>
 															</div>
 														</div>
-		                                	</div>
-		                                	<div class="col-sm-6">
 												
-
-												
-
 												<div class="input-group">
 													<span class="input-group-addon">
 														<i class="material-icons">record_voice_over</i>
 													</span>
 													<div class="form-group label-floating">
-													  <label class="control-label">Primer apellido <small>(required)</small></label>
-													  <input name="lastname" type="text" class="form-control">
-													</div>
-												</div>
-												<div class="input-group">
-													<span class="input-group-addon">
-														<i class="material-icons">record_voice_over</i>
-													</span>
-													<div class="form-group label-floating">
-													  <label class="control-label">Segundo apellido <small>(required)</small></label>
-													  <input name="lastname" type="text" class="form-control">
+													  <label class="control-label">Segundo apellido <small>(requerido)</small></label>
+													  <input name="lastname" type="text" class="form-control" class="form-control" ng-model="vm.apellido2" maxlength="20" ng-keyup="vm.functionApellido2()">
+													  <p class="mensajeError"  ng-bind="vm.mensajeApellido2"></p>
 													</div>
 												</div>
 		                                	</div>
@@ -210,8 +155,9 @@
 														<i class="material-icons">email</i>
 													</span>
 													<div class="form-group label-floating">
-			                                            <label class="control-label">Email <small>(required)</small></label>
-			                                            <input name="email" type="email" class="form-control">
+			                                            <label class="control-label">Correo electrónico <small>(requerido)</small></label>
+			                                            <input name="email" type="email" class="form-control" ng-model="vm.email" maxlength="30" ng-keyup="vm.functionEmail()">
+														<p class="mensajeError"  ng-bind="vm.mensajeEmail"></p>
 			                                        </div>
 												</div>
 		                                	</div>
@@ -222,14 +168,14 @@
 		                                <div class="row">
 		                                	
 		                                	
-		                                	<div class="col-sm-6">
+												<div class="col-sm-5 col-sm-offset-1">
 												<div class="input-group">
 													<span class="input-group-addon">
 														<i class="material-icons">face</i>
 													</span>
 													<div class="form-group label-floating">
-			                                          <label class="control-label">Télefono fijo <small>(required)</small></label>
-			                                          <input name="telefonof" type="text" class="form-control" ng-model="vm.nombre1" ng-keyup="vm.functionNombre1()">
+			                                          <label class="control-label">Télefono fijo <small></small></label>
+			                                          <input name="telefonof" type="text" class="form-control" ng-model="vm.telefonof" ng-keyup="vm.functionNombre1()">
 													  <p class="mensajeError"  ng-bind="vm.mensajeNombre1" ></p>
 													</div>
 												</div>
@@ -239,32 +185,50 @@
 														<i class="material-icons">face</i>
 													</span>
 													<div class="form-group label-floating">
-			                                          <label class="control-label">Télefono celular <small>(required)</small></label>
-			                                          <input name="telefonocel" type="text" class="form-control" ng-model="vm.nombre1" ng-keyup="vm.functionNombre1()">
+			                                          <label class="control-label">Télefono celular <small></small></label>
+			                                          <input name="telefonocel" type="text" class="form-control" ng-model="vm.telefonocel" ng-keyup="vm.functionNombre1()">
 													  <p class="mensajeError"  ng-bind="vm.mensajeNombre1" ></p>
 													</div>
 												</div>
-
+											</div>
+											<div class="col-sm-5 col-sm-offset-1">
 												<div class="input-group">
 													<span class="input-group-addon">
 														<i class="material-icons">face</i>
 													</span>
 													<div class="form-group label-floating">
-			                                          <label class="control-label">Contraseña <small>(required)</small></label>
-			                                          <input name="contraseña" type="password" class="form-control" ng-model="vm.nombre1" ng-keyup="vm.functionNombre1()">
+			                                          <label class="control-label">Contraseña <small>(requerido)</small></label>
+			                                          <input name="contraseña" type="password" class="form-control" ng-model="vm.contraseña" ng-keyup="vm.functionNombre1()">
 													  <p class="mensajeError"  ng-bind="vm.mensajeNombre1" ></p>
 													</div>
 												</div>
+												<div class="row">
+														<md-button class="md-fab">
+														  <ng-md-icon icon="info_outline" size="42" class="iconinfo" ></ng-md-icon>
+													  <md-tooltip  md-direction="top">            
+														 <p>Tu contraseña debe tener entre 8 y 12 caracteres. Debe contener al menos una letra en mayúscula y una minuscula. Debe tener al menos un número del 0 al 9 y caracteres especiales.<br></p>
+													  </md-tooltip>            
+													</md-button>   	    	
+													 </div>
 												<div class="input-group">
 													<span class="input-group-addon">
 														<i class="material-icons">face</i>
 													</span>
 													<div class="form-group label-floating">
-			                                          <label class="control-label">Confirmar Contraseña <small>(required)</small></label>
-			                                          <input name="contraseñac" type="password" class="form-control" ng-model="vm.nombre1" ng-keyup="vm.functionNombre1()">
+			                                          <label class="control-label">Confirmar Contraseña <small>(requerido)</small></label>
+			                                          <input name="contraseñac" type="password" class="form-control" ng-model="vm.contraseñac" ng-keyup="vm.functionNombre1()">
 													  <p class="mensajeError"  ng-bind="vm.mensajeNombre1" ></p>
 													</div>
 												</div>
+												<md-content>       
+          
+														<div ng-if="status">
+														   <br/>
+														   <b layout="row" layout-align="center center" class="md-padding">
+															  {{status}}
+														   </b>
+														</div>
+													 </md-content>  
 		                                	</div>
 		                                	
 		                            	</div>

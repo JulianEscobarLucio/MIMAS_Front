@@ -128,3 +128,7 @@
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+.wizard-card[data-color="red"] .moving-tab {
+  background-color: rgb(26, 81, 81);
+}
