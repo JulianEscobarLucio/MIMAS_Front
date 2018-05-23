@@ -52,7 +52,7 @@
                <span>Nombre: </span>{{mascota.nombre}}<br/> 
                <span>Edad: </span><br/>
                <span>Estado: </span>{{mascota.estado}}<br/> <br/> 
-               <button type="button" class="btn btn-success"   ng-click="vm.cancelar()" >Adoptar</button>	
+               <button type="button" class="btn btn-success"   ng-click="vm.adoptar(mascota.id)" >Adoptar</button>	
            </di>
         </div><br/>
         <div data-pagination="" data-num-pages="vm.numPages()" 

@@ -1,7 +1,7 @@
 angular.module('mimasApp')
 .controller('adopcionController', adopcionController);
 
-function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionService) {
+function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionService,$routeParams) {
     var vm = this;
     vm.usuario = localStorage.getItem("user");
     var archivoBase64='';
@@ -17,8 +17,8 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
     vm.descargarPDF = descargarPDF;
     vm.idSolicitud = "";
     vm.archivo = '' ;
-  
-  
+    vm.mascota = $routeParams.idMascota != 0 ? $routeParams.idMascota : "";
+
     vm.functionMascota = function(){
          if(vm.mascota.length > 0){
              vm.mensajeMascota ="";
@@ -285,4 +285,5 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
            });
 
     }
+
 }

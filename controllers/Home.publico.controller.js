@@ -1,11 +1,14 @@
 angular.module('mimasApp')
 .controller('homepublicoController', homepublicoController);
 
-function homepublicoController($scope, $mdDialog, homePublicoService) {
+function homepublicoController($scope,$location, $mdDialog, homePublicoService) {
     var vm = this;
     vm.listaMascota=[]; 
     vm.numPages = numPages;
     listarSolicitudes();
+    vm.adoptar = adoptar;
+    vm.$location = $location;
+
 
     function listarSolicitudes(){
         homePublicoService.listarMascota().then(function(data){
@@ -27,6 +30,11 @@ function homepublicoController($scope, $mdDialog, homePublicoService) {
         
         vm.filteredTodos = vm.listaMascota.slice(begin, end);
       });
+
+
+      function adoptar(id){
+        vm.$location.path('/login-adopcion/'+id)
+      }
 }        
 
 
