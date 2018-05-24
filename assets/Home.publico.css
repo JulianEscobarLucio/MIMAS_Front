@@ -187,17 +187,17 @@ section.success{
     }
 
     section.successs{
-        background-color: #1d4754;
+        background-color: #7d8c9159;
         color: #fff;
         }
 
     
     .navbar-default {
-        background-color: #00000008;
+        background-color: #ffffff8a;
         border-color: #e7e7e7;
         border-color: #e7e7e700;
     } 
-    
+     
     
 
     @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
