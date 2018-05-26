@@ -18,6 +18,11 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
             templateUrl: 'views/Mascota.html',
             controller: 'mascotaController'
         })
+
+        .when('/evento', {
+            templateUrl: 'views/Evento.html',
+            controller: 'eventoController'
+        })
         .when('/registra-suario', {
             templateUrl: 'views/Registrar_Usuario.html',
             controller: 'registrarUsuarioController'
