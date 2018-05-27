@@ -7,6 +7,7 @@ function homepublicoController($scope,$location, $mdDialog, homePublicoService) 
     vm.numPages = numPages;
     listarSolicitudes();
     vm.adoptar = adoptar;
+    vm.apadrinar = apadrinar;
     vm.$location = $location;
 
 
@@ -34,6 +35,10 @@ function homepublicoController($scope,$location, $mdDialog, homePublicoService) 
 
       function adoptar(id){
         vm.$location.path('/login-adopcion/'+id)
+      }
+
+      function apadrinar(id){
+        vm.$location.path('/login-apadrinar/'+id)
       }
 }        
 

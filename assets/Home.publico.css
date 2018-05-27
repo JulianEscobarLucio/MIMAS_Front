@@ -90,4 +90,14 @@ div.row h1 {
 	margin-left: 0!important;
 }
 
+.img-mascota{
+	width: 170px;
+	height: 120px !important;
+}
+.btn-adoptar{
+	width: 45% !important;
+}
+.btn-apadrinar{
+	width: 45% !important;
+}
 

@@ -9,7 +9,7 @@ function apadrinamientoController($scope, $mdDialog, $timeout,$interval, apadrin
     vm.extencionesPermitidas=' Extenciones permitidas: jpg, png, doc y pdf. ';
     vm.mensajeAdjunto = '';
     var fileReader;
-  
+    vm.mascota = $routeParams.idMascota != 0 ? $routeParams.idMascota : "";
   
     vm.functionMascota = function(){
          if(vm.mascota.length > 0){

@@ -48,12 +48,13 @@
        <!--Lista de mascotas-->
        <div class="row lista-mascota">
            <di ng-repeat="mascota in vm.filteredTodos" class="col-md-2 item-lista-mascota">
-               <img ng-src="{{ mascota.imagen }}" width="170px" height="150"  /><br/> 
+               <img class="img-mascota" ng-src="{{ mascota.imagen }}" /><br/> 
                <span>Nombre: </span>{{mascota.nombre}}<br/> 
-               <span>Edad: </span><br/>
-               <span>Estado: </span>{{mascota.estado}}<br/> <br/> 
-               <button type="button" class="btn btn-success"   ng-click="vm.adoptar(mascota.id)" >Adoptar</button>	
-           </di>
+               <span>Sexo: </span>{{mascota.genero | sexo}}<br/> 
+               <span>Estado: </span>{{mascota.estado | estado}} <br/> <br/> 
+               <button type="button" class="btn btn-success btn-adoptar"   ng-click="vm.adoptar(mascota.id)" >Adoptar</button>	
+               <button type="button" class="btn btn-success btn-apadrinar"   ng-click="vm.apadrinar(mascota.id)" >Apadrinar</button>	
+            </di>
         </div><br/>
         <div data-pagination="" data-num-pages="vm.numPages()" 
         data-current-page="vm.currentPage" data-max-size="vm.maxSize"  

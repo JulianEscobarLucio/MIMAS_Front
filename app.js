@@ -14,6 +14,10 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
             templateUrl: 'views/Login.adopcion.html',
             controller: 'loginAdopcionController'
         })
+        .when('/login-apadrinar/:idMascota', {
+            templateUrl: 'views/Login.adopcion.html',
+            controller: 'loginApadrinarController'
+        })
         .when('/home-transaccional', {
             templateUrl: 'views/Home.transaccional.html',
             controller: 'homeController'
@@ -34,7 +38,7 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
             templateUrl: 'views/Adopcion.html',
             controller: 'adopcionController'
         })        
-        .when('/apadrinamiento', {
+        .when('/apadrinamiento/:idMascota', {
             templateUrl: 'views/apadrinamiento.html',
             controller: 'apadrinamientoController'
         })
