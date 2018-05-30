@@ -1,9 +1,14 @@
 angular.module('mimasApp')
 .controller('adopcionController', adopcionController);
 
-function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionService,$routeParams) {
+function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionService,$routeParams,$location) {
+    
+    if(sessionStorage.getItem("access") != 'true' ){
+        $location.url("/"); 
+    }
+    
     var vm = this;
-    vm.usuario = localStorage.getItem("user");
+    vm.usuario = sessionStorage.getItem("user");
     var archivoBase64='';
     var extenciones = new Array("pdf")
     vm.extencionesPermitidas=' Extenciones permitidas: pdf. ';
@@ -18,8 +23,8 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
     vm.idSolicitud = "";
     vm.archivo = '' ;
     vm.mascota = $routeParams.idMascota != 0 ? $routeParams.idMascota : "";
-    vm.rol = localStorage.getItem("rol");
-    vm.bienvenidaUsuario =", "+ localStorage.getItem("nombre");
+    vm.rol = sessionStorage.getItem("rol");
+    vm.bienvenidaUsuario =", "+ sessionStorage.getItem("nombre");
 
     vm.functionMascota = function(){
          if(vm.mascota.length > 0){

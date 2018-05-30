@@ -9,8 +9,8 @@ function solicitudAdopcionController($scope, $location, $mdDialog, $timeout,$int
     listarSolicitudes();
     vm.$location = $location;
     vm.estadoSolicitud = estadoSolicitud;
-    vm.rol = localStorage.getItem("rol");
-    vm.bienvenidaUsuario = ", "+ localStorage.getItem("nombre");
+    vm.rol = sessionStorage.getItem("rol");
+    vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
 
     function listarSolicitudes(){
       solicitudAdopcionService.listarSolicitud().then(function(data){

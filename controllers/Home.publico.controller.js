@@ -5,13 +5,13 @@ function homepublicoController($scope,$location, $mdDialog, homePublicoService) 
     var vm = this;
     vm.listaMascota=[]; 
     vm.numPages = numPages;
-    listarSolicitudes();
+    listarMascotas();
     vm.adoptar = adoptar;
     vm.apadrinar = apadrinar;
     vm.$location = $location;
 
 
-    function listarSolicitudes(){
+    function listarMascotas(){
         homePublicoService.listarMascota().then(function(data){
             vm.listaMascota = data.resultado;
             vm.filteredTodos = []
@@ -19,7 +19,7 @@ function homepublicoController($scope,$location, $mdDialog, homePublicoService) 
             ,vm.numPerPage = 5
             ,vm.maxSize = 5;
         });
-      }
+     }
 
       function numPages() {
         return Math.ceil(vm.listaMascota.length / vm.numPerPage);

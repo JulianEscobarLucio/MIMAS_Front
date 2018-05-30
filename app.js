@@ -54,6 +54,10 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
             templateUrl: 'views/Estado.solicitud.adopcion.html',
             controller: 'estadoSolicitudAdopcionController'
         })
+        .when('/salir', {
+            templateUrl: 'views/Salir.html',
+            controller: 'salirController'
+        })
         .otherwise({
             redirectTo: '/'
         });

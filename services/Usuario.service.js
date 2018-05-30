@@ -32,7 +32,7 @@
 
           function consultarUsuario(auditJson){                
             var promesa = $q.defer();
-            $http.post(ipserver+"usuarioServices/consultarUsuario",auditJson)
+            $http.post(CONFIG.APIURL+"usuarioServices/consultarUsuario",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -50,7 +50,7 @@
 
         function actualizarUsuario(auditJson){                
             var promesa = $q.defer();
-            $http.post(ipserver+"usuarioServices/actualizarUsuario",auditJson)
+            $http.post(CONFIG.APIURL+"usuarioServices/actualizarUsuario",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -68,7 +68,7 @@
 
         function eliminarUsuario(auditJson){                
             var promesa = $q.defer();
-            $http.post(ipserver+"usuarioServices/eliminarUsuario",auditJson)
+            $http.post(CONFIG.APIURL+"usuarioServices/eliminarUsuario",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data

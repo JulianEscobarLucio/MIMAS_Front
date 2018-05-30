@@ -1,17 +1,22 @@
 angular.module('mimasApp')
 .controller('apadrinamientoController', apadrinamientoController);
 
-function apadrinamientoController($scope, $mdDialog, $timeout,$interval, apadrinamientoService,$routeParams) {
+function apadrinamientoController($scope, $mdDialog, $timeout,$interval, apadrinamientoService,$routeParams,$location) {
+    
+    if(sessionStorage.getItem("access") != 'true' ){
+        $location.url("/"); 
+    }
+   
     var vm = this;
-    vm.usuario = localStorage.getItem("user");
+    vm.usuario = sessionStorage.getItem("user");
     var archivoBase64='';
     var extenciones = new Array( "jpg", "png", "doc", "pdf")
     vm.extencionesPermitidas=' Extenciones permitidas: jpg, png, doc y pdf. ';
     vm.mensajeAdjunto = '';
     var fileReader;
     vm.mascota = $routeParams.idMascota != 0 ? $routeParams.idMascota : "";
-    vm.rol = localStorage.getItem("rol");
-    vm.bienvenidaUsuario =", "+ localStorage.getItem("nombre");
+    vm.rol = sessionStorage.getItem("rol");
+    vm.bienvenidaUsuario =", "+ sessionStorage.getItem("nombre");
   
     vm.functionMascota = function(){
          if(vm.mascota.length > 0){

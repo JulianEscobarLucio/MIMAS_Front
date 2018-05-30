@@ -8,8 +8,25 @@ adopcionService.$inject = ['$http','$q','CONFIG'];
 function adopcionService($http,$q,CONFIG){
     var self = this;
     self.consultarSolicitud = consultarSolicitud;
-    self.actualizarSolicitud = actualizarSolicitud; 
+    self.actualizarSolicitud = actualizarSolicitud;
+    self.enviarSolicitud = enviarSolicitud; 
 
+    function enviarSolicitud(auditJson){                
+        var promesa = $q.defer();
+        $http.post(CONFIG.APIURL+"adopcionservices/adopcion",auditJson)
+            .success(function(data){
+                promesa.resolve({
+                    resultado:data
+                })
+            })
+            .error(function(err){
+                promesa.resolve({
+                    resultado:err
+                })
+            })
+            return promesa.promise      
+        
+    }
 
     function actualizarSolicitud(auditJson){                
         var promesa = $q.defer();

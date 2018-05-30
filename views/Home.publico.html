@@ -47,7 +47,7 @@
        </div>
        <!--Lista de mascotas-->
        <div class="row lista-mascota">
-           <di ng-repeat="mascota in vm.filteredTodos" class="col-md-2 item-lista-mascota">
+           <di ng-repeat="mascota in vm.filteredTodos | filter : filtro" class="col-md-2 item-lista-mascota">
                <img class="img-mascota" ng-src="{{ mascota.imagen }}" /><br/> 
                <span>Nombre: </span class="capitalize">{{mascota.nombre}}<br/>                
                <span>Sexo: </span>{{mascota.genero | sexo}}<br/> 

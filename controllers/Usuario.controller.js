@@ -1,9 +1,13 @@
     angular
     .module('mimasApp')
     .controller('UsuarioController', UsuarioController);
- //    registrarUsuarioController.$inject = ['registarUsuarioServices'];
 
     function UsuarioController($scope, $mdDialog,UsuarioServices, $location) {
+        
+        if(sessionStorage.getItem("access") != 'true' ){
+            $location.url("/"); 
+        }
+        
         var vm = this;
         vm.actualizarUsuario = actualizarUsuario;
         vm.consultarUsuario = consultarUsuario;      
@@ -50,8 +54,8 @@
         vm.estado = '1';
         vm.functionEstado = functionEstado;
         vm.cancelar = cancelar;
-        vm.rol = localStorage.getItem("rol");
-        vm.bienvenidaUsuario = ", "+ localStorage.getItem("nombre");
+        vm.rol = sessionStorage.getItem("rol");
+        vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
 
 
         function FunctionPreguntaSeguridad(){

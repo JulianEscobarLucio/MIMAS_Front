@@ -2,6 +2,11 @@ angular.module('mimasApp')
 .controller('estadoSolicitudAdopcionController', estadoSolicitudAdopcionController);
 
 function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout,$interval, estadoSolicitudAdopcionService,$routeParams) {
+    
+    if(sessionStorage.getItem("access") != 'true' ){
+        $location.url("/"); 
+    }
+
     var vm = this;
     var archivoBase64='';
     var extenciones = new Array("pdf")
@@ -16,8 +21,8 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
     vm.archivo = '' ;
     vm.$location = $location;
     vm.atras = atras;
-       vm.rol = localStorage.getItem("rol");
-   vm.bienvenidaUsuario = ", "+ localStorage.getItem("nombre");
+    vm.rol = sessionStorage.getItem("rol");
+    vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
     consultar();
   
     $scope.fileChanged = function(files){
@@ -67,15 +72,6 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
          estadoSolicitudAdopcionService.consultarSolicitud(vm.idSolicitud).then(function(data){
             jQuery(window).spin();
             if(data.resultado[0].codRespuesta == "200") { 
-                 $mdDialog.show(
-                   $mdDialog.alert()
-                   .parent(angular.element(document.querySelector('#dialogContainer')))
-                   .clickOutsideToClose(true)
-                   .title('Consultar solicitud')
-                   .textContent('Solicitud consultada.')
-                   .ariaLabel('Solicitud consultada.')
-                   .ok('Cerrar')                     
-                  );
                 vm.mensajeMascota ='';
                 vm.mensajeNombreAdjunto = '';
                 vm.mensajeAdjunto = '';  
@@ -100,7 +96,6 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
                    .ariaLabel('Verifique el id de la solicitud.')
                    .ok('Cerrar')                     
                   );
-
             }            
          });
     }

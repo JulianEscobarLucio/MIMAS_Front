@@ -2,10 +2,19 @@ angular
 .module('mimasApp')
 .controller('homeController', homeController);
 
-function homeController($scope) {
-  var vm = this;
-   vm.rol = localStorage.getItem("rol");
-   vm.bienvenidaUsuario = ", "+ localStorage.getItem("nombre");
+function homeController($scope,$location) {
+  
+  if(sessionStorage.getItem("access") != 'true' ){
+    $location.url("/"); 
+   }
+
+   var vm = this;
+   vm.rol = sessionStorage.getItem("rol");
+   vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
+
+
+
+   
 
 } 
     

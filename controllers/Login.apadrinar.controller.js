@@ -10,7 +10,7 @@ angular
         vm.mensajeContrasena = '';
         vm.functionUsuario = functionUsuario ;
         vm.functionContrasena = functionContrasena;        
-        $window.login = login; 
+        vm.login = login;
         localStorage.setItem("user", '');
         vm.idMascota = $routeParams.idMascota;
         console.log("idmascota: "+vm.idMascota);
@@ -68,7 +68,10 @@ angular
               jQuery(window).spin();  
             if(data.resultado[0].codRespuesta == "200") {   
                 var usuario = vm.usuario;                    
-                localStorage.setItem("user", vm.usuario.trim());             
+                sessionStorage.setItem("user", vm.usuario.trim());
+                sessionStorage.setItem("nombre", data.resultado[0].nombre1);   
+                sessionStorage.setItem("rol", data.resultado[0].rol);
+                sessionStorage.setItem("access", true);                
                 $mdDialog.show(
                   $mdDialog.alert()
                      .parent(angular.element(document.querySelector('#dialogContainer')))

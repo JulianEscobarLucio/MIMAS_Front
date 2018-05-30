@@ -1,7 +1,12 @@
     angular.module('mimasApp')
     .controller('mascotaController', mascotaController);
 
-    function mascotaController($scope, $mdDialog,registarMascotaServices, $timeout,CONFIG) {
+    function mascotaController($scope, $mdDialog,registarMascotaServices, $timeout,CONFIG,$location) {
+        
+      if(sessionStorage.getItem("access") != 'true' ){
+        $location.url("/"); 
+       }
+       
         var vm = this;
         vm.FechaN = "";
         vm.isOpen = false;             
@@ -50,12 +55,12 @@
         vm.showConfirm = showConfirm;
         vm.cancelar = cancelar;
         vm.DisabledCancelar = true;
-        vm.IdResponsable = localStorage.getItem("user"); 
+        vm.IdResponsable = sessionStorage.getItem("user"); 
         vm.imagen = "";
         vm.fechaN = new Date();
-        vm.rol = localStorage.getItem("rol");
-        vm.bienvenidaUsuario = ", "+ localStorage.getItem("nombre");
-
+        vm.rol = sessionStorage.getItem("rol");
+        vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
+        
 
        vm.thumbnail = {
          dataUrl: ''
@@ -74,8 +79,12 @@
           return dataURL;
       }
       
-      debugger;
       vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
+      
+      if(vm.thumbnail.dataUrl =="data:," ){
+        location.reload(true);
+      }
+
 
        $scope.photoChanged = function(files){
           if (files != null) {
