@@ -1,3 +1,4 @@
+<!-- <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" /> -->
 
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header page-scroll">
@@ -63,10 +64,22 @@
         
 </header>
 
-<div class="content-wrapper">
+<div class="content-wrapper" ng-controller="homepublicoController as vm" id="dialogContainer" >
    
     <section class="success" id="Mascotas">
-       
+        <div class="row lista-mascota">
+            <di ng-repeat="mascota in vm.filteredTodos | filter : filtro" class="col-md-2 item-lista-mascota">
+                <img class="img-mascota" ng-src="{{ mascota.imagen }}" /><br/> 
+                <span>Nombre: </span class="capitalize">{{mascota.nombre}}<br/>                
+                <span>Sexo: </span>{{mascota.genero | sexo}}<br/> 
+                <span>Estado: </span>{{mascota.estado | estado}} <br/> <br/> 
+                <button type="button" class="btn btn-success btn-adoptar"   ng-click="vm.adoptar(mascota.id)" >Adoptar</button>	
+                <button type="button" class="btn btn-success btn-apadrinar"   ng-click="vm.apadrinar(mascota.id)" >Apadrinar</button>	
+             </di>
+         </div><br/>
+         <div data-pagination="" data-num-pages="vm.numPages()" 
+         data-current-page="vm.currentPage" data-max-size="vm.maxSize"  
+         data-boundary-links="true"></div>  
     </section>
     <section class="success" id="Eventos">
         <div class="container">
@@ -426,7 +439,6 @@
 
 <div>
     <div class="body-home-publico"  ng-controller="homepublicoController as vm" id="dialogContainer" >
-<<<<<<< HEAD
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
@@ -438,62 +450,6 @@
             </div>
         </div>
     <div class="container-fluid">
-=======
-       <div class="container-fluid">
-          <div class="row">
-             <div class="col-xs-12">
-                <h1 class="bienvenida">BIENVENIDOS</h1>
-             </div>
-             <div class="col-xs-12 centered logo ">
-             </div>
-          </div>
-          <!-- fin row-->
-       </div>
-       <!--Lista de mascotas-->
-       <div class="row lista-mascota">
-           <di ng-repeat="mascota in vm.filteredTodos | filter : filtro" class="col-md-2 item-lista-mascota">
-               <img class="img-mascota" ng-src="{{ mascota.imagen }}" /><br/> 
-               <span>Nombre: </span class="capitalize">{{mascota.nombre}}<br/>                
-               <span>Sexo: </span>{{mascota.genero | sexo}}<br/> 
-               <span>Estado: </span>{{mascota.estado | estado}} <br/> <br/> 
-               <button type="button" class="btn btn-success btn-adoptar"   ng-click="vm.adoptar(mascota.id)" >Adoptar</button>	
-               <button type="button" class="btn btn-success btn-apadrinar"   ng-click="vm.apadrinar(mascota.id)" >Apadrinar</button>	
-            </di>
-        </div><br/>
-        <div data-pagination="" data-num-pages="vm.numPages()" 
-        data-current-page="vm.currentPage" data-max-size="vm.maxSize"  
-        data-boundary-links="true"></div>   
-       <!-- fin container -->
-       <div class="container-fluid">
-          <div class="row">
-             <div class="col-xs-12">
-                <h1 class="titulo">¿QUIENES SOMOS?</h1>
-             </div>
-          </div>
-          <div class="row quienes">
-             <div class="col-xs-12 col-md-6 col-md-offset-1">
-                <h3 class="titulo">SOBRE NOSOTROS</h3>
-                <p>
-                   MIMAS es una red social para fundaciones protectoras de animales impulsada por la fundación FPA, dicha fundación se encarga de la adopción, apadrinamiento y recuperación de animales; todo con la misión de que cada animal tenga la oportunidad de encontrar un hogar.
-                </p>
-                <p>
-                   La fundación también planea el poder permitir a los usuarios gestionar sus procesos de forma interactiva (apoyo al sostenimiento de la fundación con donaciones en especie, publicar animales extraviados y encontrados, búsqueda de animales y solicitudes de adopción). Ampliando así la cobertura del servicio y permitiendo la recepción de más solicitudes.
-                </p>
-                <p>
-                   La fundación requiere que, dentro de los casos de adopción, se puedan registrar los avances y resultados de seguimientos post adopción, teniendo la trazabilidad completa del proceso.
-                </p>
-             </div>
-             <div class="col-xs-12 col-md-5 ">
-                <h3 class="titulo">CONTACTO</h3>
-                <p>TELÉFONO</p>
-                <p>(+57) 300 274 3671</p>
-                <p>DIRECCIÓN</p>
-                <p>Cll 39 Sur # 37 - 10 (fundación FPA)</p>
-                <span>Estamos ubicados en la ciudad de Envigado</span>
-             </div>
-          </div>
-       </div>
->>>>>>> develop
     </div>
     <div class="social">
     </div>
