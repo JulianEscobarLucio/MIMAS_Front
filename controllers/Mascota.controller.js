@@ -1,13 +1,10 @@
     angular.module('mimasApp')
     .controller('mascotaController', mascotaController);
 
-    function mascotaController($scope, $mdDialog,registarMascotaServices, $timeout) {
+    function mascotaController($scope, $mdDialog,registarMascotaServices, $timeout,CONFIG) {
         var vm = this;
         vm.FechaN = "";
-        vm.isOpen = false;
-
-
-             
+        vm.isOpen = false;             
         vm.registrar = registrar;
         vm.consultar = consultar;
         vm.actualizar = actualizar;
@@ -56,7 +53,8 @@
         vm.IdResponsable = localStorage.getItem("user"); 
         vm.imagen = "";
         vm.fechaN = new Date();
-   
+        vm.rol = localStorage.getItem("rol");
+        vm.bienvenidaUsuario = ", "+ localStorage.getItem("nombre");
 
 
        vm.thumbnail = {

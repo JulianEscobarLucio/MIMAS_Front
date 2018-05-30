@@ -1,7 +1,7 @@
 angular.module('mimasApp')
 .controller('apadrinamientoController', apadrinamientoController);
 
-function apadrinamientoController($scope, $mdDialog, $timeout,$interval, apadrinamientoService) {
+function apadrinamientoController($scope, $mdDialog, $timeout,$interval, apadrinamientoService,$routeParams) {
     var vm = this;
     vm.usuario = localStorage.getItem("user");
     var archivoBase64='';
@@ -10,6 +10,8 @@ function apadrinamientoController($scope, $mdDialog, $timeout,$interval, apadrin
     vm.mensajeAdjunto = '';
     var fileReader;
     vm.mascota = $routeParams.idMascota != 0 ? $routeParams.idMascota : "";
+    vm.rol = localStorage.getItem("rol");
+    vm.bienvenidaUsuario =", "+ localStorage.getItem("nombre");
   
     vm.functionMascota = function(){
          if(vm.mascota.length > 0){

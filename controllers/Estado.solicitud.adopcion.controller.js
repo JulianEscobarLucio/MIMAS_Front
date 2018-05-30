@@ -16,6 +16,8 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
     vm.archivo = '' ;
     vm.$location = $location;
     vm.atras = atras;
+       vm.rol = localStorage.getItem("rol");
+   vm.bienvenidaUsuario = ", "+ localStorage.getItem("nombre");
     consultar();
   
     $scope.fileChanged = function(files){

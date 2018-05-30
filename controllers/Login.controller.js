@@ -2,7 +2,7 @@ angular
     .module('mimasApp')
     .controller('loginController', loginController);
 
-  function loginController($scope, $mdDialog,loginServices, $location, $window) {
+  function loginController($scope, $mdDialog,loginServices, $location, $window, CONFIG) {
         var vm = this;
         vm.ingresar = ingresar;
         vm.cancelar = cancelar;
@@ -67,7 +67,9 @@ angular
               jQuery(window).spin();  
             if(data.resultado[0].codRespuesta == "200") {   
                 var usuario = vm.usuario;                    
-                localStorage.setItem("user", vm.usuario.trim());             
+                localStorage.setItem("user", vm.usuario.trim());
+                localStorage.setItem("nombre", data.resultado[0].nombre1);   
+                localStorage.setItem("rol", data.resultado[0].rol);                
                 $mdDialog.show(
                   $mdDialog.alert()
                      .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -76,7 +78,7 @@ angular
                      .textContent('Usuario valido')
                      .ariaLabel('Usuario registrado')
                      .ok('Cerrar')                     
-               );                
+               );       
                $location.url("/home-transaccional");      
             }else{
                 $mdDialog.show(

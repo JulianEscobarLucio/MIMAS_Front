@@ -18,6 +18,8 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
     vm.idSolicitud = "";
     vm.archivo = '' ;
     vm.mascota = $routeParams.idMascota != 0 ? $routeParams.idMascota : "";
+    vm.rol = localStorage.getItem("rol");
+    vm.bienvenidaUsuario =", "+ localStorage.getItem("nombre");
 
     vm.functionMascota = function(){
          if(vm.mascota.length > 0){
