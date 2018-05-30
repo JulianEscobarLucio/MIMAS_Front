@@ -10,6 +10,14 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
             templateUrl: 'views/Login.html',
             controller: 'loginController'
         })
+        .when('/login-adopcion/:idMascota', {
+            templateUrl: 'views/Login.adopcion.html',
+            controller: 'loginAdopcionController'
+        })
+        .when('/login-apadrinar/:idMascota', {
+            templateUrl: 'views/Login.adopcion.html',
+            controller: 'loginApadrinarController'
+        })
         .when('/home-transaccional', {
             templateUrl: 'views/Home.transaccional.html',
             controller: 'homeController'
@@ -26,11 +34,11 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
             templateUrl: 'views/Usuario.html',
             controller: 'UsuarioController'
         })
-        .when('/adopcion', {
+        .when('/adopcion/:idMascota', {
             templateUrl: 'views/Adopcion.html',
             controller: 'adopcionController'
         })        
-        .when('/apadrinamiento', {
+        .when('/apadrinamiento/:idMascota', {
             templateUrl: 'views/apadrinamiento.html',
             controller: 'apadrinamientoController'
         })
@@ -46,8 +54,6 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
             templateUrl: 'views/Estado.solicitud.adopcion.html',
             controller: 'estadoSolicitudAdopcionController'
         })
-        
-
         .when('/solicitudes-apadrinamiento', {
             templateUrl: 'views/SoliciudesApadrinamiento.html',
             controller: 'solicitudApadrinamientoController'
@@ -59,6 +65,10 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
         .when('/estado-solicitudA/:idSolicitud', {
             templateUrl: 'views/Estado.solicitud.apadrinamiento.html',
             controller: 'estadoSolicitudApadrinamientoController'
+        })
+        .when('/salir', {
+            templateUrl: 'views/Salir.html',
+            controller: 'salirController'
         })
         .otherwise({
             redirectTo: '/'

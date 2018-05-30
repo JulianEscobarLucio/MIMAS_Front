@@ -1,13 +1,15 @@
     angular.module('mimasApp')
     .controller('mascotaController', mascotaController);
 
-    function mascotaController($scope, $mdDialog,registarMascotaServices, $timeout) {
+    function mascotaController($scope, $mdDialog,registarMascotaServices, $timeout,CONFIG,$location) {
+        
+      if(sessionStorage.getItem("access") != 'true' ){
+        $location.url("/"); 
+       }
+       
         var vm = this;
         vm.FechaN = "";
-        vm.isOpen = false;
-
-
-             
+        vm.isOpen = false;             
         vm.registrar = registrar;
         vm.consultar = consultar;
         vm.actualizar = actualizar;
@@ -53,11 +55,12 @@
         vm.showConfirm = showConfirm;
         vm.cancelar = cancelar;
         vm.DisabledCancelar = true;
-        vm.IdResponsable = localStorage.getItem("user"); 
+        vm.IdResponsable = sessionStorage.getItem("user"); 
         vm.imagen = "";
         vm.fechaN = new Date();
-   
-
+        vm.rol = sessionStorage.getItem("rol");
+        vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
+        
 
        vm.thumbnail = {
          dataUrl: ''
@@ -76,8 +79,12 @@
           return dataURL;
       }
       
-      debugger;
       vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
+      
+      if(vm.thumbnail.dataUrl =="data:," ){
+        location.reload(true);
+      }
+
 
        $scope.photoChanged = function(files){
           if (files != null) {
@@ -110,7 +117,6 @@
         
         vm.Id2 = "";
         vm.nombre = "";
-        vm.IdResponsable  = "";
         vm.Especie = "";
         vm.Raza = "";
         vm.Genero = "";   
@@ -365,7 +371,7 @@
                        .parent(angular.element(document.querySelector('#dialogContainer')))
                        .clickOutsideToClose(true)
                        .title('Registrar Mascota')
-                       .textContent('Se registró la mascota exitósamente.')
+                       .textContent('Se registró la mascota exitósamente, identificador de la mascota: ' +data.resultado[0].idMascota)
                        .ariaLabel('Se registró la mascota exitósamente.')
                        .ok('Cerrar')                     
                       );

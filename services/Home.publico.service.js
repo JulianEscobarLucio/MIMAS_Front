@@ -1,18 +1,18 @@
 angular
 .module('mimasApp')
-.service('solicitudAdopcionService',solicitudAdopcionService);
+.service('homePublicoService',homePublicoService);
 
 
-solicitudAdopcionService.$inject = ['$http','$q','CONFIG'];
+homePublicoService.$inject = ['$http','$q','CONFIG'];
 
-function solicitudAdopcionService($http,$q,CONFIG){
+function homePublicoService($http,$q,CONFIG){
     var self = this;
-    self.listarSolicitud = listarSolicitud;
+    self.listarMascota = listarMascota;
 
     
-    function listarSolicitud(){                
+    function listarMascota(){                
         var promesa = $q.defer();
-        $http.get(CONFIG.APIURL+"adopcionservices/list-adopcion")
+        $http.get(CONFIG.APIURL+"Mascotaservices/listaMascota")
             .success(function(data){
                 promesa.resolve({
                     resultado:data

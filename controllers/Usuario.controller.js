@@ -1,9 +1,13 @@
     angular
     .module('mimasApp')
     .controller('UsuarioController', UsuarioController);
- //    registrarUsuarioController.$inject = ['registarUsuarioServices'];
 
     function UsuarioController($scope, $mdDialog,UsuarioServices, $location) {
+        
+        if(sessionStorage.getItem("access") != 'true' ){
+            $location.url("/"); 
+        }
+        
         var vm = this;
         vm.actualizarUsuario = actualizarUsuario;
         vm.consultarUsuario = consultarUsuario;      
@@ -50,27 +54,9 @@
         vm.estado = '1';
         vm.functionEstado = functionEstado;
         vm.cancelar = cancelar;
+        vm.rol = sessionStorage.getItem("rol");
+        vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
 
-
-   /*   function showConfirm (ev) {
-          // Appending dialog to document.body to cover sidenav in docs app
-          var confirm = $mdDialog.confirm()
-                .title('Vas a desactivar un usuario')
-                .textContent('Estás seguro que vas a desactivar este usuario.')
-                .ariaLabel('Lucky day')
-                .targetEvent(ev)
-                .ok('Aceptar')
-                .cancel('Cancelar');
-
-          $mdDialog.show(confirm).then(function() {
-            vm.eliminarUsuario();
-          }, function() {
-            //$scope.status = 'You decided to keep your debt.';
-          });
-        };*/
-
-       
-                    
 
         function FunctionPreguntaSeguridad(){
             if(vm.preguntaSeguridad != undefined || vm.preguntaSeguridad != '1' ){
