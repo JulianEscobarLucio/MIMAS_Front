@@ -97,5 +97,5 @@ box-shadow: 10px 11px 5px 0px rgba(219,210,219,1);
     color: #ffffff;
     background-color: #54d354;
 }
-
+.capitalize { text-transform: capitalize; } 
 

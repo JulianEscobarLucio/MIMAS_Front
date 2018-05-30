@@ -362,7 +362,7 @@
                        .parent(angular.element(document.querySelector('#dialogContainer')))
                        .clickOutsideToClose(true)
                        .title('Registrar Mascota')
-                       .textContent('Se registró la mascota exitósamente.')
+                       .textContent('Se registró la mascota exitósamente, identificador de la mascota: ' +data.resultado[0].idMascota)
                        .ariaLabel('Se registró la mascota exitósamente.')
                        .ok('Cerrar')                     
                       );

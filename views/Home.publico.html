@@ -49,7 +49,7 @@
        <div class="row lista-mascota">
            <di ng-repeat="mascota in vm.filteredTodos" class="col-md-2 item-lista-mascota">
                <img class="img-mascota" ng-src="{{ mascota.imagen }}" /><br/> 
-               <span>Nombre: </span>{{mascota.nombre}}<br/> 
+               <span>Nombre: </span class="capitalize">{{mascota.nombre}}<br/>                
                <span>Sexo: </span>{{mascota.genero | sexo}}<br/> 
                <span>Estado: </span>{{mascota.estado | estado}} <br/> <br/> 
                <button type="button" class="btn btn-success btn-adoptar"   ng-click="vm.adoptar(mascota.id)" >Adoptar</button>	
