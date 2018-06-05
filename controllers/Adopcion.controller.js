@@ -118,23 +118,52 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
          jQuery(window).spin();
          adopcionService.enviarSolicitud(requestJson).then(function(data){
             jQuery(window).spin();
-            if(data.resultado[0].codRespuesta == "200") {     
+             if(data.resultado.codigoRespuesta == "200") {     
                    $mdDialog.show(
                      $mdDialog.alert()
                         .parent(angular.element(document.querySelector('#dialogContainer')))
                         .clickOutsideToClose(true)
                         .title('Solicitud de adopción')
-                        .textContent('Se envió la solicitud exitósamente.')
-                        .ariaLabel('Se envió la solicitud exitósamente.')
+                        .textContent('Se envió la solicitud exitosamente con el seiguiente número: '+ data.resultado.idAdopcion )
+                        .ariaLabel('Se envió la solicitud exitosamente.')
                         .ok('Cerrar')                     
                     );
                     
                    vm.mascota = "";
                    vm.nombreAdjunto = "";
                    document.getElementById("file").value = "";
-                  
 
-              }else if(data.resultado[0].codRespuesta == "501"){
+              }else  if(data.resultado.codigoRespuesta == "201") {     
+                $mdDialog.show(
+                  $mdDialog.alert()
+                     .parent(angular.element(document.querySelector('#dialogContainer')))
+                     .clickOutsideToClose(true)
+                     .title('Solicitud de adopción')
+                     .textContent('No se envió la solicitud')
+                     .ariaLabel('No se envió la solicitud.')
+                     .ok('Cerrar')                     
+                 );
+                 
+                    vm.mascota = "";
+                    vm.nombreAdjunto = "";
+                    document.getElementById("file").value = "";
+               
+
+               }else if(data.resultado.codigoRespuesta == "500"){
+                    $mdDialog.show(
+                    $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('#dialogContainer')))
+                    .clickOutsideToClose(true)
+                    .title('Solicitud de adopción')
+                    .textContent('Ocurrió un error en el servidor.')
+                    .ariaLabel('Ocurrió un error en el servidor.')
+                    .ok('Cerrar')                     
+                    );
+
+                    vm.mascota = "";
+                    vm.nombreAdjunto = "";
+                    document.getElementById("file").value = "";
+               } else if(data.resultado.codigoRespuesta == "501"){
                      $mdDialog.show(
                      $mdDialog.alert()
                      .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -168,7 +197,7 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
          jQuery(window).spin();
          adopcionService.consultarSolicitud(vm.Id).then(function(data){
             jQuery(window).spin();
-            if(data.resultado[0].codRespuesta == "200") { 
+            if(data.resultado.codigoRespuesta == "200") { 
                  $mdDialog.show(
                    $mdDialog.alert()
                    .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -182,14 +211,14 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
                 vm.mensajeNombreAdjunto = '';
                 vm.mensajeAdjunto = '';  
                 vm.idSolicitud = vm.Id;
-                vm.usuario = data.resultado[0].usuario;
-                vm.mascota = data.resultado[0].idMascota;
-                vm.nombreAdjunto = data.resultado[0].nombreAdjunto;
+                vm.usuario = data.resultado.usuario;
+                vm.mascota = data.resultado.idMascota;
+                vm.nombreAdjunto = data.resultado.nombreAdjunto;
                 
-                vm.archivo =  data.resultado[0].adjunto ;
+                vm.archivo =  data.resultado.adjunto ;
            
                
-                switch(data.resultado[0].estado){
+                switch(data.resultado.estado){
                     case "1":
                         vm.estado = 'En proceso' ;
                         break;
@@ -252,7 +281,7 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
          jQuery(window).spin();
          adopcionService.actualizarSolicitud(requestJson).then(function(data){
             jQuery(window).spin();
-            if(data.resultado[0].codRespuesta == "200") {     
+            if(data.resultado == "200") {     
                    $mdDialog.show(
                      $mdDialog.alert()
                         .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -274,7 +303,7 @@ function adopcionController($scope, $mdDialog, $timeout,$interval, adopcionServi
                    document.getElementById("file").value = "";
                   
 
-              }else if(data.resultado[0].codRespuesta == "201"){
+              }else if(data.resultado == "201"){
                      $mdDialog.show(
                      $mdDialog.alert()
                      .parent(angular.element(document.querySelector('#dialogContainer')))

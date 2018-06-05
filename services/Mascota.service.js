@@ -14,7 +14,7 @@
 
         function registrarMascota(auditJson){                
             var promesa = $q.defer();
-            $http.post(CONFIG.APIURL+"Mascotaservices/registrarMacota",auditJson)
+            $http.post(CONFIG.APIURL+"mascotas",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -29,9 +29,9 @@
             
         }
 
-function consultarMascotaServices(auditJson){                
+    function consultarMascotaServices(id){                
             var promesa = $q.defer();
-            $http.post(CONFIG.APIURL+"Mascotaservices/consultarMascota",auditJson)
+            $http.get(CONFIG.APIURL+"mascotas/"+id)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -48,7 +48,7 @@ function consultarMascotaServices(auditJson){
 
         function actualizarMascota(auditJson){                
             var promesa = $q.defer();
-            $http.post(CONFIG.APIURL+"Mascotaservices/actualizarMascota",auditJson)
+            $http.put(CONFIG.APIURL+"mascotas",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -64,9 +64,9 @@ function consultarMascotaServices(auditJson){
         }
 
     
-         function eliminarMascota(auditJson){                
+         function eliminarMascota(id){                
             var promesa = $q.defer();
-            $http.post(CONFIG.APIURL+"Mascotaservices/eliminarMascota",auditJson)
+            $http.delete(CONFIG.APIURL+"mascotas/"+id)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data

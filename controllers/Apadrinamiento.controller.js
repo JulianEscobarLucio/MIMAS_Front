@@ -98,14 +98,14 @@ function apadrinamientoController($scope, $mdDialog, $timeout,$interval, apadrin
          };
          jQuery(window).spin();
          apadrinamientoService.enviarSolicitud(requestJson).then(function(data){
-            jQuery(window).spin();
-            if(data.resultado[0].codRespuesta == "200") {     
+             jQuery(window).spin();
+             if(data.resultado.codigoRespuesta == "200") {     
                    $mdDialog.show(
                      $mdDialog.alert()
                         .parent(angular.element(document.querySelector('#dialogContainer')))
                         .clickOutsideToClose(true)
                         .title('Solicitud de apadrinamiento')
-                        .textContent('Se envió la solicitud exitósamente.')
+                        .textContent('Se envió la solicitud exitosamente con el seiguiente número: '+ data.resultado.idApadrinamiento )
                         .ariaLabel('Se envió la solicitud exitósamente.')
                         .ok('Cerrar')                     
                     );
@@ -115,7 +115,37 @@ function apadrinamientoController($scope, $mdDialog, $timeout,$interval, apadrin
                    document.getElementById("file").value = "";
                   
 
-              }else if(data.resultado[0].codRespuesta == "501"){
+               }else  if(data.resultado.codigoRespuesta == "201") {     
+                $mdDialog.show(
+                  $mdDialog.alert()
+                     .parent(angular.element(document.querySelector('#dialogContainer')))
+                     .clickOutsideToClose(true)
+                     .title('Solicitud de adopción')
+                     .textContent('No se envió la solicitud')
+                     .ariaLabel('No se envió la solicitud.')
+                     .ok('Cerrar')                     
+                 );
+                 
+                    vm.mascota = "";
+                    vm.nombreAdjunto = "";
+                    document.getElementById("file").value = "";
+               
+
+               }else if(data.resultado.codigoRespuesta == "500"){
+                    $mdDialog.show(
+                    $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('#dialogContainer')))
+                    .clickOutsideToClose(true)
+                    .title('Solicitud de adopción')
+                    .textContent('Ocurrió un error en el servidor.')
+                    .ariaLabel('Ocurrió un error en el servidor.')
+                    .ok('Cerrar')                     
+                    );
+
+                    vm.mascota = "";
+                    vm.nombreAdjunto = "";
+                    document.getElementById("file").value = "";
+               }else if(data.resultado.codigoRespuesta == "501"){
                      $mdDialog.show(
                      $mdDialog.alert()
                      .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -129,7 +159,7 @@ function apadrinamientoController($scope, $mdDialog, $timeout,$interval, apadrin
                     vm.mascota = "";
                     vm.nombreAdjunto = "";
                     document.getElementById("file").value = "";
-              }         
+               }         
            });
 
     }

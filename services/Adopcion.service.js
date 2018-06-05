@@ -13,7 +13,7 @@ function adopcionService($http,$q,CONFIG){
 
     function enviarSolicitud(auditJson){                
         var promesa = $q.defer();
-        $http.post(CONFIG.APIURL+"adopcionservices/adopcion",auditJson)
+        $http.post(CONFIG.APIURL+"adopciones",auditJson)
             .success(function(data){
                 promesa.resolve({
                     resultado:data
@@ -30,7 +30,7 @@ function adopcionService($http,$q,CONFIG){
 
     function actualizarSolicitud(auditJson){                
         var promesa = $q.defer();
-        $http.put(CONFIG.APIURL+"adopcionservices/adopcion",auditJson)
+        $http.put(CONFIG.APIURL+"adopciones",auditJson)
             .success(function(data){
                 promesa.resolve({
                     resultado:data
@@ -47,11 +47,7 @@ function adopcionService($http,$q,CONFIG){
 
     function consultarSolicitud(idSolicitud){
         var promesa = $q.defer();
-        $http.get(CONFIG.APIURL+"adopcionservices/adopcion",{
-            params: {
-                id: idSolicitud
-            }  
-        })
+        $http.get(CONFIG.APIURL+"adopciones/"+idSolicitud)
         .success(function(data){
             promesa.resolve({
                 resultado:data

@@ -12,7 +12,7 @@ function homePublicoService($http,$q,CONFIG){
     
     function listarMascota(){                
         var promesa = $q.defer();
-        $http.get(CONFIG.APIURL+"Mascotaservices/listaMascota")
+        $http.get(CONFIG.APIURL+"mascotas")
             .success(function(data){
                 promesa.resolve({
                     resultado:data

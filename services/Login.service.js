@@ -10,8 +10,7 @@
         function login(auditJson){                
             var promesa = $q.defer();
             debugger;
-            $http.post(CONFIG.APIURL+"securityServices/login"
-                        ,auditJson)
+            $http.post(CONFIG.APIURL+"login",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data

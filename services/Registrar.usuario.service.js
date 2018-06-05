@@ -12,7 +12,7 @@
 
         function registrarUsuario(auditJson){                
             var promesa = $q.defer();
-            $http.post(CONFIG.APIURL+"usuarioServices/registrarUsuario",auditJson)
+            $http.post(CONFIG.APIURL+"usuario",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data

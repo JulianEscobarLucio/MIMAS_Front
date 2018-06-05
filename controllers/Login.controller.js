@@ -66,11 +66,11 @@ angular
             console.log(JSON.stringify(requestJson));                      
             loginServices.login(requestJson).then(function(data){
             jQuery(window).spin();  
-            if(data.resultado[0].codRespuesta == "200") {   
+             if(data.resultado.nombre1 != "") {   
                 var usuario = vm.usuario;                    
                 sessionStorage.setItem("user", vm.usuario.trim());
-                sessionStorage.setItem("nombre", data.resultado[0].nombre1);   
-                sessionStorage.setItem("rol", data.resultado[0].rol);
+                sessionStorage.setItem("nombre", data.nombre1);   
+                sessionStorage.setItem("rol", data.resultado.rol);
                 sessionStorage.setItem("access", true);                 
                 $mdDialog.show(
                   $mdDialog.alert()

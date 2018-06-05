@@ -12,7 +12,6 @@ function apadrinamientoService($http,$q,CONFIG){
  //   self.actualizarSolicitud = actualizarSolicitud;
 
     var self = this;
-    var ipserver = 'http://localhost:8081'; 
     self.enviarSolicitud = enviarSolicitud;
 
     // function actualizarSolicitud(auditJson){                
@@ -34,7 +33,7 @@ function apadrinamientoService($http,$q,CONFIG){
 
     function enviarSolicitud(auditJson){                
         var promesa = $q.defer();
-        $http.post(CONFIG.APIURL+"apadrinamientoservices/apadrinamiento",auditJson)
+        $http.post(CONFIG.APIURL+"apadrinamientos",auditJson)
             .success(function(data){
                 promesa.resolve({
                     resultado:data

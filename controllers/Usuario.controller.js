@@ -66,8 +66,6 @@
 
         }   
 
-
-
        
         function FunctionRol(){
             if(vm.rol != undefined || vm.rol != '0' ){
@@ -76,9 +74,6 @@
             }
 
         } 
-
-    
-                
             
         function functionNombre1(){
             if(vm.nombre1.length > 0){
@@ -89,10 +84,7 @@
 
 
         function functionNombre2(){
-
-
         } 
-
 
         function functionApellido1(){
             if(vm.apellido1.length > 0){
@@ -101,16 +93,12 @@
         } 
 
 
-
-
         function functionapellido2(){
             if(vm.apellido2.length > 0){
               vm.mensajeapellido2 = "";
 
             }     
-
         } 
-
 
 
         function functionTelefonoFijo(){
@@ -120,7 +108,6 @@
             }     
 
         } 
-
 
 
         function functionTelefonoMovil(){
@@ -301,11 +288,11 @@
                     "rol" : vm.rol,
                     "estado" : vm.estado   
                     }        
-          vm.modalShown2 = true;
-               console.log(JSON.stringify(requestJson));
+            vm.modalShown2 = true;
+            jQuery(window).spin();
             UsuarioServices.actualizarUsuario(requestJson).then(function(data){
-                debugger;
-            if(data.resultado[0].codRespuesta == "200") {
+            jQuery(window).spin();
+            if(data.resultado == "200") {
                vm.nombre1 = '';
                vm.nombre2 ='';
                vm.apellido1 = '';
@@ -337,7 +324,7 @@
                      vm.DisabledEliminar = true;
                      vm.DisabledCancelar = true;
                
-         }else if(data.resultado[0].codRespuesta == "203"){
+         }else if(data.resultado == "203"){
                 $mdDialog.show(
                   $mdDialog.alert()
                      .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -357,12 +344,8 @@
                      .textContent('Usuario no actualizado')
                      .ariaLabel('Usuario no actualizado')
                      .ok('Cerrar')
-                     
                );
             } 
-
-
-       
            });
      }
 
@@ -371,25 +354,25 @@
             if(vm.email == undefined  || vm.email == ''){
                    vm.mensajeEmail = "Debes ingresar un email para consultar";
                    return;
-             }  
-
-
-            var requestJson = {
-                    "nombre1" : vm.nombre1,
-                    "nombre2" : vm.nombre2,
-                    "apellido1" : vm.apellido1,
-                    "apellido2" : vm.apellido2,
-                    "telefonoFijo" : vm.telefonoFijo,
-                    "telefonomovil" : vm.telefonoMovil, 
-                    "email" : vm.email,
-                    "pregunta":  vm.preguntaSeguridad,
-                    "respuesta" :  vm.respuesta,
-                    "contrasena" :vm.contrasena,
-                    "rol" : vm.rol, 
-                    "estado" : vm.estado   
-                    }      
+             } 
+             var requestJson = {
+                "nombre1" : vm.nombre1,
+                "nombre2" : vm.nombre2,
+                "apellido1" : vm.apellido1,
+                "apellido2" : vm.apellido2,
+                "telefonoFijo" : vm.telefonoFijo,
+                "telefonomovil" : vm.telefonoMovil, 
+                "email" : vm.email,
+                "pregunta":  vm.preguntaSeguridad,
+                "respuesta" :  vm.respuesta,
+                "contrasena" :vm.contrasena,                   
+                "rol" : vm.rol,
+                "estado" : vm.estado   
+                } 
+             jQuery(window).spin();
              UsuarioServices.consultarUsuario(requestJson).then(function(data){
-                if(data.resultado[0].codRespuesta == "200") { 
+             jQuery(window).spin();
+             if(data.resultado.nombre1 != "") { 
                      $mdDialog.show(
                        $mdDialog.alert()
                        .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -400,18 +383,18 @@
                        .ok('Cerrar')                     
                       );
 
-                     vm.nombre1 = data.resultado[0].nombre1;
-                     vm.nombre2 = data.resultado[0].nombre2;
-                     vm.apellido1 = data.resultado[0].apellido1;         
-                     vm.apellido2 =  data.resultado[0].apellido2;
-                     vm.telefonoFijo = data.resultado[0].telefonoFijo;
-                     vm.telefonoMovil = data.resultado[0].telefonomovil;                    
-                     vm.preguntaSeguridad = data.resultado[0].pregunta;
-                     vm.respuesta = data.resultado[0].respuesta;
-                     vm.contrasena = data.resultado[0].contrasena;
-                     vm.confirmarContrasena  =  data.resultado[0].contrasena;
-                     vm.rol  =  data.resultado[0].rol;
-                     vm.estado  = data.resultado[0].estado;
+                     vm.nombre1 = data.resultado.nombre1;
+                     vm.nombre2 = data.resultado.nombre2;
+                     vm.apellido1 = data.resultado.apellido1;         
+                     vm.apellido2 =  data.resultado.apellido2;
+                     vm.telefonoFijo = data.resultado.telefonoFijo;
+                     vm.telefonoMovil = data.resultado.telefonomovil;                    
+                     vm.preguntaSeguridad = data.resultado.pregunta;
+                     vm.respuesta = data.resultado.respuesta;
+                     vm.contrasena = data.resultado.contrasena;
+                     vm.confirmarContrasena  =  data.resultado.contrasena;
+                     vm.rol  =  data.resultado.rol;
+                     vm.estado  = data.resultado.estado;
 
 
                      vm.DisabledEmail = true;

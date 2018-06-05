@@ -225,10 +225,9 @@
              vm.modalShown2 = true;
                console.log(JSON.stringify(requestJson));
 
-              registarUsuarioServices.registrarUsuario(requestJson).then(function(data){
-                debugger;
+        registarUsuarioServices.registrarUsuario(requestJson).then(function(data){
             try {    
-                if(data.resultado[0].codRespuesta == "200") {
+             if(data.resultado == "200") {
                 vm.nombre1 = '',
                 vm.nombre2 ='',
                 vm.apellido1 = '',
@@ -251,7 +250,7 @@
                         .ok('Cerrar')                     
                 );
                 
-                }else if(data.resultado[0].codRespuesta == "202"){
+             }else if(data.resultado.codRespuesta == "202"){
                     $mdDialog.show(
                     $mdDialog.alert()
                         .parent(angular.element(document.querySelector('#dialogContainer')))
