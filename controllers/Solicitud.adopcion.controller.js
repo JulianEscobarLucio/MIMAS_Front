@@ -9,6 +9,8 @@ function solicitudAdopcionController($scope, $location, $mdDialog, $timeout,$int
     listarSolicitudes();
     vm.$location = $location;
     vm.estadoSolicitud = estadoSolicitud;
+    vm.rol = sessionStorage.getItem("rol");
+    vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
 
     function listarSolicitudes(){
       solicitudAdopcionService.listarSolicitud().then(function(data){
@@ -32,7 +34,6 @@ function solicitudAdopcionController($scope, $location, $mdDialog, $timeout,$int
     });
 
     function estadoSolicitud(id){
-      debugger;
       vm.$location.path('/estado-solicitud/'+id)
     }
 

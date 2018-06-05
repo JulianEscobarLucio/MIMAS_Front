@@ -4,16 +4,15 @@
 		.service('registarUsuarioServices',registarUsuarioServices);
 
 
-	registarUsuarioServices.$inject = ['$http','$q'];
+	registarUsuarioServices.$inject =  ['$http','$q','CONFIG'];
 
-	function registarUsuarioServices($http,$q){
+	function registarUsuarioServices($http,$q,CONFIG){
          var self = this;
-        var ipserver = 'http://localhost:8080'; 
         self.registrarUsuario = registrarUsuario;
 
         function registrarUsuario(auditJson){                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/usuarioServices/registrarUsuario",auditJson)
+            $http.post(CONFIG.APIURL+"usuario",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data

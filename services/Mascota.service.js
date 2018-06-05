@@ -3,11 +3,10 @@
 		.service('registarMascotaServices',registarMascotaServices);
 
 
-	registarMascotaServices.$inject = ['$http','$q'];
+	registarMascotaServices.$inject = ['$http','$q','CONFIG'];
 
-	function registarMascotaServices($http,$q){
+	function registarMascotaServices($http,$q,CONFIG){
          var self = this;
-        var ipserver = 'http://localhost:8080'; 
         self.registrarMascota = registrarMascota;
         self.consultarMascotaServices = consultarMascotaServices;
         self.actualizarMascota = actualizarMascota;
@@ -15,7 +14,7 @@
 
         function registrarMascota(auditJson){                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/Mascotaservices/registrarMacota",auditJson)
+            $http.post(CONFIG.APIURL+"mascotas",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -30,9 +29,9 @@
             
         }
 
-function consultarMascotaServices(auditJson){                
+    function consultarMascotaServices(id){                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/Mascotaservices/consultarMascota",auditJson)
+            $http.get(CONFIG.APIURL+"mascotas/"+id)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -49,7 +48,7 @@ function consultarMascotaServices(auditJson){
 
         function actualizarMascota(auditJson){                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/Mascotaservices/actualizarMascota",auditJson)
+            $http.put(CONFIG.APIURL+"mascotas",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -65,9 +64,9 @@ function consultarMascotaServices(auditJson){
         }
 
     
-         function eliminarMascota(auditJson){                
+         function eliminarMascota(id){                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/Mascotaservices/eliminarMascota",auditJson)
+            $http.delete(CONFIG.APIURL+"mascotas/"+id)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data

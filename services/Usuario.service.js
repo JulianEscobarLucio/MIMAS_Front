@@ -3,11 +3,10 @@
 		.service('UsuarioServices',UsuarioServices);
 
 
-	UsuarioServices.$inject = ['$http','$q'];
+	UsuarioServices.$inject = ['$http','$q','CONFIG'];
 
-	function UsuarioServices($http,$q){
+	function UsuarioServices($http,$q,CONFIG){
          var self = this;
-        var ipserver = 'http://localhost:8080'; 
         self.registrarUsuario = registrarUsuario;
         self.consultarUsuario = consultarUsuario;
         self.actualizarUsuario = actualizarUsuario;
@@ -15,7 +14,7 @@
 
         function registrarUsuario(auditJson){                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/usuarioServices/registrarUsuario",auditJson)
+            $http.post(CONFIG.APIURL+"usuario",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -30,10 +29,9 @@
             
         }
 
-
-          function consultarUsuario(auditJson){                
+        function consultarUsuario(usuario){                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/usuarioServices/consultarUsuario",auditJson)
+            $http.post(CONFIG.APIURL+"consultarusuario/",usuario)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -44,14 +42,14 @@
                         resultado:err
                     })
                 })
-                return promesa.promise     
+            return promesa.promise     
             
         }
 
 
         function actualizarUsuario(auditJson){                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/usuarioServices/actualizarUsuario",auditJson)
+            $http.put(CONFIG.APIURL+"usuario",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data
@@ -63,13 +61,12 @@
                     })
                 })
                 return promesa.promise     
-            
         }
 
 
         function eliminarUsuario(auditJson){                
             var promesa = $q.defer();
-            $http.post(ipserver+"/mimas/rest/usuarioServices/eliminarUsuario",auditJson)
+            $http.post(CONFIG.APIURL+"usuario",auditJson)
                 .success(function(data){
                     promesa.resolve({
                         resultado:data

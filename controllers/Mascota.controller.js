@@ -1,13 +1,15 @@
     angular.module('mimasApp')
     .controller('mascotaController', mascotaController);
 
-    function mascotaController($scope, $mdDialog,registarMascotaServices, $timeout) {
+    function mascotaController($scope, $mdDialog,registarMascotaServices, $timeout,CONFIG,$location) {
+        
+      if(sessionStorage.getItem("access") != 'true' ){
+        $location.url("/"); 
+       }
+       
         var vm = this;
         vm.FechaN = "";
-        vm.isOpen = false;
-
-
-             
+        vm.isOpen = false;             
         vm.registrar = registrar;
         vm.consultar = consultar;
         vm.actualizar = actualizar;
@@ -53,11 +55,12 @@
         vm.showConfirm = showConfirm;
         vm.cancelar = cancelar;
         vm.DisabledCancelar = true;
-        vm.IdResponsable = localStorage.getItem("user"); 
+        vm.IdResponsable = sessionStorage.getItem("user"); 
         vm.imagen = "";
         vm.fechaN = new Date();
-   
-
+        vm.rol = sessionStorage.getItem("rol");
+        vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
+        
 
        vm.thumbnail = {
          dataUrl: ''
@@ -76,13 +79,17 @@
           return dataURL;
       }
       
-      debugger;
       vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
+      
+      if(vm.thumbnail.dataUrl =="data:," ){
+        location.reload(true);
+      }
+
 
        $scope.photoChanged = function(files){
           if (files != null) {
               debugger;
-              var file = files[0];
+              var file = files;
               vm.imagen = file.name 
             if (vm.fileReaderSupported && file.type.indexOf('image') > -1) {
                 $timeout(function() {
@@ -110,7 +117,6 @@
         
         vm.Id2 = "";
         vm.nombre = "";
-        vm.IdResponsable  = "";
         vm.Especie = "";
         vm.Raza = "";
         vm.Genero = "";   
@@ -354,54 +360,53 @@
                     "estadoSalud" : vm.EstadoSalud ,
                      "imagen" : vm.thumbnail.dataUrl                
                     }
-             console.log(JSON.stringify(requestJson));
              jQuery(window).spin();       
              registarMascotaServices.registrarMascota(requestJson).then(function(data){
-              jQuery(window).spin();
-              vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
-                if(data.resultado[0].codRespuesta == "200") {     
-                       $mdDialog.show(
-                       $mdDialog.alert()
-                       .parent(angular.element(document.querySelector('#dialogContainer')))
-                       .clickOutsideToClose(true)
-                       .title('Registrar Mascota')
-                       .textContent('Se registró la mascota exitósamente.')
-                       .ariaLabel('Se registró la mascota exitósamente.')
-                       .ok('Cerrar')                     
-                      );
+             jQuery(window).spin();
+             vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
+             if(data.resultado.codigoRespuesta == "201") {     
+                  $mdDialog.show(
+                  $mdDialog.alert()
+                  .parent(angular.element(document.querySelector('#dialogContainer')))
+                  .clickOutsideToClose(true)
+                  .title('Registrar Mascota')
+                  .textContent('Se registró la mascota exitósamente, identificador de la mascota: ' +data.resultado.id)
+                  .ariaLabel('Se registró la mascota exitósamente.')
+                  .ok('Cerrar')                     
+                );
                       
-                     vm.Id = "",
-                     vm.nombre = "",
-                     vm.IdResponsable  = "",
-                     vm.Especie = "",
-                     vm.Raza = "",
-                     vm.Genero = "",                  
-                     vm.Tamano = "",
-                     vm.Estado = "",
-                     vm.Caracteristicas = "",
-                     vm.Vacunas = "",
-                     vm.FechaN = "",
-                     vm.Senales = "",
-                     vm.Color = "",
-                     vm.Colorojos = "",
-                     vm.Personalidad = "",
-                     vm.EstadoSalud   = "",
-                     vm.thumbnail.dataUrl = "";
-                     vm.thumbnail = {
-                    dataUrl: ''
-                    };               
+                  vm.Id = "",
+                  vm.nombre = "",
+                  vm.IdResponsable  = "",
+                  vm.Especie = "",
+                  vm.Raza = "",
+                  vm.Genero = "",                  
+                  vm.Tamano = "",
+                  vm.Estado = "",
+                  vm.Caracteristicas = "",
+                  vm.Vacunas = "",
+                  vm.FechaN = "",
+                  vm.Senales = "",
+                  vm.Color = "",
+                  vm.Colorojos = "",
+                  vm.Personalidad = "",
+                  vm.EstadoSalud   = "",
+                  vm.thumbnail.dataUrl = "";
+                  vm.thumbnail = {
+                  dataUrl: ''
+                };               
 
-                }else if(data.resultado[0].codRespuesta == "201"){
+                }else if(data.resultado.codigoRespuesta == "202" ){
                        $mdDialog.show(
                        $mdDialog.alert()
                        .parent(angular.element(document.querySelector('#dialogContainer')))
                        .clickOutsideToClose(true)
                        .title('Registrar Mascota')
-                       .textContent('Mascota no registrada')
-                       .ariaLabel('Mascota no registrada')
+                       .textContent('Mascota no registrada.')
+                       .ariaLabel('Mascota no registrada.')
                        .ok('Cerrar')                     
                       );
-                }else if(data.resultado[0].codRespuesta == "202"){
+                }else if(data.resultado.codigoRespuesta == "203"){
                        $mdDialog.show(
                        $mdDialog.alert()
                        .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -411,7 +416,17 @@
                        .ariaLabel('La mascota ya se enuentra registrada.')
                        .ok('Cerrar')                     
                       );
-                }           
+                }else if(data.resultado.codigoRespuesta == "500"){
+                  $mdDialog.show(
+                  $mdDialog.alert()
+                  .parent(angular.element(document.querySelector('#dialogContainer')))
+                  .clickOutsideToClose(true)
+                  .title('Registrar Mascota')
+                  .textContent('Ocurrió un error tratando de registrar la mascota.')
+                  .ariaLabel('La mascota ya se enuentra registrada.')
+                  .ok('Cerrar')                     
+                 );
+           }           
              });
         } 
 
@@ -524,19 +539,18 @@
                     }         
 
           
-               console.log(JSON.stringify(requestJson));
-               jQuery(window).spin();       
-             registarMascotaServices.actualizarMascota(requestJson).then(function(data){
+              jQuery(window).spin();       
+              registarMascotaServices.actualizarMascota(requestJson).then(function(data){
               jQuery(window).spin();
               vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
-                if(data.resultado[0].codRespuesta == "200") {     
+              if(data.resultado == "200") {     
                        $mdDialog.show(
                        $mdDialog.alert()
                        .parent(angular.element(document.querySelector('#dialogContainer')))
                        .clickOutsideToClose(true)
                        .title('Actualizar mascota')
-                       .textContent('Se actualizó la mascota exitósamente.')
-                       .ariaLabel('Se actualizó la mascota exitósamente.')
+                       .textContent('Se actualizó la mascota exitosamente.')
+                       .ariaLabel('Se actualizó la mascota exitosamente.')
                        .ok('Cerrar')                     
                       );
                     vm.Id2 = "";
@@ -569,8 +583,8 @@
                        .parent(angular.element(document.querySelector('#dialogContainer')))
                        .clickOutsideToClose(true)
                        .title('Actualizar mascota')
-                       .textContent('masocta no actualizado')
-                       .ariaLabel('Mascota no actualizado')
+                       .textContent('Mascota no actualizada.')
+                       .ariaLabel('Mascota no actualizada.')
                        .ok('Cerrar')                     
                       );
                 }           
@@ -584,29 +598,10 @@
                    return;
              }
        
-
-           var requestJson = {
-                     "id" : vm.Id2,
-                    "nombre" : vm.nombre,
-                    "idResponsable": vm.IdResponsable ,
-                    "especie" : vm.Especie,
-                    "raza" : vm.Raza,
-                    "genero" : vm.Genero,                  
-                    "tamano" : vm.Tamano,
-                    "estado" : vm.Estado,
-                    "caracteristicas" : vm.Caracteristicas,
-                    "fechaN" : vm.FechaN,
-                    "senales" : vm.Senales,
-                    "color" : vm.Color,
-                    "colorojos" : vm.Colorojos,
-                    "personalidad" : vm.Personalidad,
-                    "estadoSalud" : vm.EstadoSalud ,
-                    "imagen" : vm.imagen                                        
-                    }
-                    jQuery(window).spin();
-             registarMascotaServices.consultarMascotaServices(requestJson).then(function(data){
-                   jQuery(window).spin();
-                if(data.resultado[0].codRespuesta == "200") { 
+             jQuery(window).spin();
+             registarMascotaServices.consultarMascotaServices(vm.Id2).then(function(data){
+             jQuery(window).spin();
+             if(data.resultado.nombre != null && data.resultado.nombre != "" ) { 
                      $mdDialog.show(
                        $mdDialog.alert()
                        .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -617,21 +612,21 @@
                        .ok('Cerrar')                     
                       );
                     vm.Id = vm.Id2;
-                    vm.nombre = data.resultado[0].nombre,
-                    vm.IdResponsable  = data.resultado[0].idResponsable,
-                    vm.Especie = data.resultado[0].especie,
-                    vm.Raza = data.resultado[0].raza,
-                    vm.Genero = data.resultado[0].genero,                
-                    vm.Tamano = data.resultado[0].tamano,
-                    vm.Estado = data.resultado[0].estado,
-                    vm.Caracteristicas = data.resultado[0].caracteristicas,
-                    vm.FechaN = new Date(data.resultado[0].fechaN),
-                    vm.Senales = data.resultado[0].senales,
-                    vm.Color = data.resultado[0].color,
-                    vm.Colorojos = data.resultado[0].colorOjos,
-                    vm.Personalidad = data.resultado[0].personalidad,
-                    vm.EstadoSalud   = data.resultado[0].estadoSalud, 
-                    vm.thumbnail.dataUrl =  data.resultado[0].imagen,
+                    vm.nombre = data.resultado.nombre;
+                    vm.IdResponsable  = data.resultado.idResponsable;
+                    vm.Especie = data.resultado.especie;
+                    vm.Raza = data.resultado.raza;
+                    vm.Genero = data.resultado.genero;                
+                    vm.Tamano = data.resultado.tamano;
+                    vm.Estado = data.resultado.estado;
+                    vm.Caracteristicas = data.resultado.caracteristicas;
+                    vm.FechaN = new Date(data.resultado.fechaN);
+                    vm.Senales = data.resultado.senales;
+                    vm.Color = data.resultado.color;
+                    vm.Colorojos = data.resultado.colorojos;
+                    vm.Personalidad = data.resultado.personalidad;
+                    vm.EstadoSalud   = data.resultado.estadoSalud; 
+                    vm.thumbnail.dataUrl =  data.resultado.imagen;
 
                     vm.Id2 = ""; 
                      vm.idDisabled = true;
@@ -648,7 +643,7 @@
                        .parent(angular.element(document.querySelector('#dialogContainer')))
                        .clickOutsideToClose(true)
                        .title('Consultar Mascota')
-                       .textContent('Masocta no consultada.')
+                       .textContent('Masocta no consultada')
                        .ariaLabel('Verifique el id de la mascota.')
                        .ok('Cerrar')                     
                       );
@@ -660,32 +655,11 @@
 
 
         function eliminar(){
-         
-
-        
-           var requestJson = {
-                     "id" : vm.Id,
-                    "nombre" : vm.nombre,
-                    "idResponsable": vm.IdResponsable ,
-                    "especie" : vm.Especie,
-                    "raza" : vm.Raza,
-                    "genero" : vm.Genero,                
-                    "tamano" : vm.Tamano,
-                    "estado" : vm.Estado,
-                    "caracteristicas" : vm.Caracteristicas,
-                    "fechaN" : vm.FechaN,
-                    "senales" : vm.Senales,
-                    "color" : vm.Color,
-                    "colorojos" : vm.Colorojos,
-                    "personalidad" : vm.Personalidad,
-                    "estadoSalud" : vm.EstadoSalud,
-                    "imagen" : vm.imagen                                         
-                    }
              jQuery(window).spin();
-             registarMascotaServices.eliminarMascota(requestJson).then(function(data){
-               jQuery(window).spin();
+             registarMascotaServices.eliminarMascota(vm.Id).then(function(data){
+              jQuery(window).spin();
                vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
-                if(data.resultado[0].codRespuesta == "200") { 
+                if(data.resultado == "200") { 
                      $mdDialog.show(
                        $mdDialog.alert()
                        .parent(angular.element(document.querySelector('#dialogContainer')))
