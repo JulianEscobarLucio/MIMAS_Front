@@ -58,7 +58,7 @@ div.logo{
 
 	height: 600px;
 	margin: auto;
-	background: url(images.png) no-repeat center; 
+	/* background: url(images.png) no-repeat center;  */
 }
 
 div.row h1 {

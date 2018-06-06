@@ -13,7 +13,7 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
     vm.extencionesPermitidas=' Extenciones permitidas: pdf. ';
     vm.mensajeAdjunto = '';
     var fileReader;
-    vm.estado = "";
+    vm.estado = 0;
     vm.consultar = consultar;
     vm.actualizar = actualizar;
     vm.descargarPDF = descargarPDF;
@@ -29,9 +29,9 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
         //Read File
         var selectedFile = files;
         if (selectedFile.length > 0) {
-            var extension = selectedFile[0].name.split(".")[1]; 
+            var extension = selectedFile.name.split(".")[1]; 
             if(extencionesContains(extension)){
-                var fileToLoad = selectedFile[0];
+                var fileToLoad = selectedFile;
                 fileReader = new FileReader();
                 var base64;
                 fileReader.onload = function(fileLoadedEvent) {
@@ -71,15 +71,15 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
          jQuery(window).spin();
          estadoSolicitudAdopcionService.consultarSolicitud(vm.idSolicitud).then(function(data){
             jQuery(window).spin();
-            if(data.resultado[0].codRespuesta == "200") { 
+            if(data.resultado.codigoRespuesta == "200") { 
                 vm.mensajeMascota ='';
                 vm.mensajeNombreAdjunto = '';
                 vm.mensajeAdjunto = '';  
-                vm.usuario = data.resultado[0].usuario;
-                vm.mascota = data.resultado[0].idMascota;
-                vm.nombreAdjunto = data.resultado[0].nombreAdjunto;
-                vm.estado = data.resultado[0].estado;
-                vm.archivo =  data.resultado[0].adjunto ;
+                vm.usuario = data.resultado.usuario;
+                vm.mascota = data.resultado.idMascota;
+                vm.nombreAdjunto = data.resultado.nombreAdjunto;
+                vm.estado = data.resultado.estadoSolicitud;
+                vm.archivo =  data.resultado.adjunto ;
              
                 vm.Id = ""; 
                 vm.idDisabled = true;
@@ -87,15 +87,6 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
                 vm.DisabledEnviar = true;
                 vm.DisabledConsultar = true; 
             }else {
-                  $mdDialog.show(
-                   $mdDialog.alert()
-                   .parent(angular.element(document.querySelector('#dialogContainer')))
-                   .clickOutsideToClose(true)
-                   .title('Consultar solicitud')
-                   .textContent('Solicitud no consultada.')
-                   .ariaLabel('Verifique el id de la solicitud.')
-                   .ok('Cerrar')                     
-                  );
             }            
          });
     }
@@ -112,7 +103,7 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
          jQuery(window).spin();
          estadoSolicitudAdopcionService.actualizarSolicitud(requestJson).then(function(data){
             jQuery(window).spin();
-            if(data.resultado[0].codRespuesta == "200") {     
+            if(data.resultado== "200") {     
                    $mdDialog.show(
                      $mdDialog.alert()
                         .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -133,7 +124,7 @@ function estadoSolicitudAdopcionController($scope,$location, $mdDialog, $timeout
                    vm.DisabledConsultar = false; 
                   
 
-              }else if(data.resultado[0].codRespuesta == "201"){
+              }else if(data.resultado == "201"){
                      $mdDialog.show(
                      $mdDialog.alert()
                      .parent(angular.element(document.querySelector('#dialogContainer')))

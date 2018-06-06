@@ -69,7 +69,7 @@ angular
              if(data.resultado.nombre1 != "") {   
                 var usuario = vm.usuario;                    
                 sessionStorage.setItem("user", vm.usuario.trim());
-                sessionStorage.setItem("nombre", data.nombre1);   
+                sessionStorage.setItem("nombre", data.resultado.nombre1);   
                 sessionStorage.setItem("rol", data.resultado.rol);
                 sessionStorage.setItem("access", true);                 
                 $mdDialog.show(
