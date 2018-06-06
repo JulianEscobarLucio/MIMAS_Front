@@ -89,10 +89,10 @@
             <di ng-repeat="evento in vm.filteredTodos | filter : filtro" class="col-md-2 item-lista-evento">
                 <img class="img-evento" ng-src="{{ evento.imagen }}" /><br/> 
                 <span>Nombre: </span class="capitalize">{{evento.nombre}}<br/>                
-                <span>Sexo: </span>{{evento.genero | sexo}}<br/> 
+                <span>Lugar: </span>{{evento.lugar | lugar}}<br/> 
                 <span>Estado: </span>{{evento.estado | estado}} <br/> <br/> 
-                <button type="button" class="btn btn-success btn-adoptar"   ng-click="vm.adoptar(mascota.id)" >Adoptar</button>	
-                <button type="button" class="btn btn-success btn-apadrinar"   ng-click="vm.apadrinar(mascota.id)" >Apadrinar</button>	
+                <button type="button" class="btn btn-success btn-adoptar"   ng-click="vm.adoptar(evento.id)" >Adoptar</button>	
+                <button type="button" class="btn btn-success btn-apadrinar"   ng-click="vm.apadrinar(evento.id)" >Apadrinar</button>	
              </di>
          </div><br/>
          <div data-pagination="" data-num-pages="vm.numPages()" 
@@ -100,7 +100,7 @@
          data-boundary-links="true"></div>  
     </section>
 
-    <section class="success" id="Mascotas">
+    <section class="success" id="Eventos">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
