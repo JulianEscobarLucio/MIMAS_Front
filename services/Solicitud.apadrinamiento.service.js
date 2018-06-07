@@ -3,17 +3,17 @@ angular
 .service('solicitudApadrinamientoService',solicitudApadrinamientoService);
 
 
-solicitudApadrinamientoService.$inject = ['$http','$q'];
+solicitudApadrinamientoService.$inject = ['$http','$q','CONFIG'];
 
-function solicitudApadrinamientoService($http,$q){
+function solicitudApadrinamientoService($http,$q,CONFIG){
     var self = this;
-    var ipserver = 'http://localhost:8080'; 
     self.listarSolicitud = listarSolicitud;
 
     
     function listarSolicitud(){                
         var promesa = $q.defer();
-        $http.get(ipserver+"/mimas/rest/apadrinamientoservices/list-apadrinamiento")
+        debugger;
+        $http.get(CONFIG.APIURL+"/apadrinamientos")
             .success(function(data){
                 promesa.resolve({
                     resultado:data
