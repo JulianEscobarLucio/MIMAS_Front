@@ -9,6 +9,8 @@ function solicitudApadrinamientoController($scope, $location, $mdDialog, $timeou
     listarSolicitudes();
     vm.$location = $location;
     vm.estadoSolicitud = estadoSolicitud;
+    vm.rol = sessionStorage.getItem("rol");
+    vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
 
     function listarSolicitudes(){
       solicitudApadrinamientoService.listarSolicitud().then(function(data){
@@ -32,7 +34,6 @@ function solicitudApadrinamientoController($scope, $location, $mdDialog, $timeou
     });
 
     function estadoSolicitud(id){
-      debugger;
       vm.$location.path('/estado-solicitudA/'+id)
     }
 

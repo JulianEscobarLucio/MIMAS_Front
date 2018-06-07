@@ -3,22 +3,17 @@ angular
 .service('estadoSolicitudApadrinamientoService',estadoSolicitudApadrinamientoService);
 
 
-estadoSolicitudApadrinamientoService.$inject = ['$http','$q'];
+estadoSolicitudApadrinamientoService.$inject = ['$http','$q','CONFIG'];
 
-function estadoSolicitudApadrinamientoService($http,$q){
+function estadoSolicitudApadrinamientoService($http,$q,CONFIG){
     var self = this;
-    var ipserver = 'http://localhost:8080'; 
     self.consultarSolicitud = consultarSolicitud;
     self.actualizarSolicitud = actualizarSolicitud;
 
   
       function consultarSolicitud(idSolicitud){
         var promesa = $q.defer();
-        $http.get(ipserver+"/mimas/rest/apadrinamientoservices/apadrinamiento",{
-            params: {
-                id: idSolicitud
-            }  
-        })
+        $http.get(CONFIG.APIURL+"/apadrinamientos/"+idSolicitud)
         .success(function(data){
             promesa.resolve({
                 resultado:data
@@ -34,7 +29,7 @@ function estadoSolicitudApadrinamientoService($http,$q){
 
     function actualizarSolicitud(auditJson){                
       var promesa = $q.defer();
-      $http.put(ipserver+"/mimas/rest/apadrinamientoservices/apadrinamiento",auditJson)
+      $http.put(CONFIG.APIURL+"/apadrinamientos",auditJson)
           .success(function(data){
               promesa.resolve({
                   resultado:data

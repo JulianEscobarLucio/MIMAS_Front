@@ -12,7 +12,7 @@ function solicitudAdopcionService($http,$q,CONFIG){
     
     function listarSolicitud(){                
         var promesa = $q.defer();
-        $http.get(CONFIG.APIURL+"adopcionservices/list-adopcion")
+        $http.get(CONFIG.APIURL+"adopciones")
             .success(function(data){
                 promesa.resolve({
                     resultado:data
