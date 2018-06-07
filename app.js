@@ -65,6 +65,9 @@ angular.module('mimasApp', ['ngRoute','ngMaterial', 'ngMessages','ngMask','ngMdI
         .when('/estado-solicitudA/:idSolicitud', {
             templateUrl: 'views/Estado.solicitud.apadrinamiento.html',
             controller: 'estadoSolicitudApadrinamientoController'
+        }).when('/evento', {
+            templateUrl: 'views/Evento.html',
+            controller: 'eventoController'
         })
         .when('/salir', {
             templateUrl: 'views/Salir.html',
