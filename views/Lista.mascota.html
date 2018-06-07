@@ -1,6 +1,7 @@
 <!-- <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" /> -->
 
 <section class="success" id="Mascotas">
+    <div class="adoptame-apadriname"><h1>Adoptame o apadriname</h1></div>
     <div class="row lista-mascota">
         <di ng-repeat="mascota in vm.filteredTodos | filter : filtro" class="col-md-2 item-lista-mascota">
             <img class="img-mascota" ng-src="{{ mascota.imagen }}" /><br/> 
