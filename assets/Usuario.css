@@ -23,10 +23,11 @@
 }
 
 .titulo{
-	
-	margin-bottom: 70px;
+  margin-bottom: 70px;
   color: rgb(29, 51, 102);
   padding-left: 150px;
+  font-size: 30px;
+  font-weight: inherit;
 }
 
 
@@ -72,7 +73,7 @@
   margin-bottom: 0; }
 
  .md-fab{
-  	    margin-left: 50% !important;
+  	    margin-left: 48% !important;
   	    background-color: transparent !important;
         width: 40px !important;
         height: 40px !important;
