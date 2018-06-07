@@ -451,3 +451,16 @@ body {padding-top:0px;}
     padding-right: 34%;
     color: #30a6c0;
 }
+
+.body-login{
+    width: 30%;
+    margin-left: 33%;
+    padding-top: 5%;
+}
+
+
+.titulo-login {
+    margin-bottom: 70px;
+    color: rgb(29, 51, 102);
+    padding-left: 26%;
+}
