@@ -57,16 +57,30 @@ angular
 
 
     function login(){
+            if(vm.usuario == undefined || vm.usuario == ''){
+              vm.mensajeUsuario = 'Ingrese un valor válido';
+              return;
+            }
+
+            if(!/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(vm.usuario)){
+              vm.mensajeUsuario   = "Ingrese un correo valido";
+              return;
+            }
+
+            if(vm.contrasena == undefined || vm.contrasena == ''){
+              vm.mensajeContrasena = 'Ingrese un valor válido';
+              return;
+            }
            jQuery(window).spin();
             var requestJson = {
                     "email" : vm.usuario,
                     "contrasena" : vm.contrasena
                     }        
-            vm.modalShown2 = true;
-            console.log(JSON.stringify(requestJson));                      
-            loginServices.login(requestJson).then(function(data){
+              vm.modalShown2 = true;
+              console.log(JSON.stringify(requestJson));                      
+              loginServices.login(requestJson).then(function(data){
               jQuery(window).spin();  
-            if(data.resultado[0].codRespuesta == "200") {   
+              if(data.resultado.nombre1 != null && data.resultado.nombre1 != "") {   
                 var usuario = vm.usuario;                    
                 sessionStorage.setItem("user", vm.usuario.trim());
                 sessionStorage.setItem("nombre", data.resultado[0].nombre1);   

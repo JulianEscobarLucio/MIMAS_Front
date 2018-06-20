@@ -4,13 +4,11 @@ angular
 
   function loginController($scope, $mdDialog,loginServices, $location, $window, CONFIG) {
     var vm = this;
-   // vm.ingresar = ingresar;
     vm.cancelar = cancelar;
     vm.mensajeUsuario = '';
     vm.mensajeContrasena = '';
     vm.functionUsuario = functionUsuario ;
     vm.functionContrasena = functionContrasena;        
- //   $window.login = login; 
     vm.login = login;
     localStorage.setItem("user", '');
 
@@ -29,25 +27,24 @@ angular
 
   }
 
-  // function ingresar() {
-  //   // jQuery(window).spin();
-  //       if(vm.usuario == undefined || vm.usuario == ''){
-  //           vm.mensajeUsuario = 'Ingrese un valor válido';
-  //           return;
-  //         }
+   function validarDatos() {
+         if(vm.usuario == undefined || vm.usuario == ''){
+             vm.mensajeUsuario = 'Ingrese un valor válido';
+             return;
+           }
           
-  //         if(!/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(vm.usuario)){
-  //           vm.mensajeUsuario   = "Ingrese un correo valido";
-  //           return;
-  //         }
+           if(!/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(vm.usuario)){
+             vm.mensajeUsuario   = "Ingrese un correo valido";
+             return;
+           }
 
-  //       if(vm.contrasena == undefined || vm.contrasena == ''){
-  //           vm.mensajeContrasena = 'Ingrese un valor válido';
-  //           return;
-  //       }
+         if(vm.contrasena == undefined || vm.contrasena == ''){
+             vm.mensajeContrasena = 'Ingrese un valor válido';
+             return;
+        }
 
   //       grecaptcha.execute();
-  // }
+   }
 
 
    function cancelar(){
@@ -57,6 +54,20 @@ angular
 
 
     function login(){
+          if(vm.usuario == undefined || vm.usuario == ''){
+            vm.mensajeUsuario = 'Ingrese un valor válido';
+            return;
+          }
+
+          if(!/^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(vm.usuario)){
+            vm.mensajeUsuario   = "Ingrese un correo valido";
+            return;
+          }
+
+          if(vm.contrasena == undefined || vm.contrasena == ''){
+            vm.mensajeContrasena = 'Ingrese un valor válido';
+            return;
+          }
            jQuery(window).spin();
             var requestJson = {
                     "email" : vm.usuario,
@@ -66,7 +77,7 @@ angular
             console.log(JSON.stringify(requestJson));                      
             loginServices.login(requestJson).then(function(data){
             jQuery(window).spin();  
-             if(data.resultado.nombre1 != "") {   
+            if(data.resultado.nombre1 != null && data.resultado.nombre1 != "") {   
                 var usuario = vm.usuario;                    
                 sessionStorage.setItem("user", vm.usuario.trim());
                 sessionStorage.setItem("nombre", data.resultado.nombre1);   

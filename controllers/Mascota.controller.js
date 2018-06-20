@@ -89,7 +89,7 @@
        $scope.photoChanged = function(files){
           if (files != null) {
               debugger;
-              var file = files;
+              var file = files[0];
               vm.imagen = file.name 
             if (vm.fileReaderSupported && file.type.indexOf('image') > -1) {
                 $timeout(function() {

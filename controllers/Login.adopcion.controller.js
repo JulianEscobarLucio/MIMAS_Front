@@ -79,8 +79,8 @@ angular
             vm.modalShown2 = true;
             console.log(JSON.stringify(requestJson));                      
             loginServices.login(requestJson).then(function(data){
-              jQuery(window).spin();  
-              if(data.resultado.nombre1 != "") {   
+            jQuery(window).spin();  
+            if(data.resultado.nombre1 != null && data.resultado.nombre1 != ""){   
                 var usuario = vm.usuario;                    
                 sessionStorage.setItem("user", vm.usuario.trim());
                 sessionStorage.setItem("nombre", data.resultado.nombre1);   

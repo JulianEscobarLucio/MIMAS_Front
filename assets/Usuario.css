@@ -121,3 +121,7 @@
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+.footer-zone-transactional{
+  margin-top: 10%;
+}

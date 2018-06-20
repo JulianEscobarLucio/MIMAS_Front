@@ -25,18 +25,19 @@ function eventoController($scope, $mdDialog,registarEventoServices, $timeout) {
     vm.mensajeEstado = "";
     vm.functionId2 = functionId2;
     vm.functionNombre = functionNombre;
-    vm.functionUsuario = functionUsuario;        
+    vm.functionResponsable = functionResponsable;        
     vm.functionLugar = functionLugar;
     vm.functionDescripcion= functionDescripcion;        
     vm.functionEstado = functionEstado;
     vm.showConfirm = showConfirm;
     vm.cancelar = cancelar;
     vm.DisabledCancelar = true;
-    vm.Usuario = localStorage.getItem("user"); 
     vm.imagen = "";
     vm.Fechai = new Date();
     vm.Fechaf = new Date();
-
+    vm.rol = sessionStorage.getItem("rol");
+    vm.bienvenidaUsuario = ", "+ sessionStorage.getItem("nombre");
+    vm.usuario = sessionStorage.getItem("user");
 
 
   
@@ -59,6 +60,10 @@ function eventoController($scope, $mdDialog,registarEventoServices, $timeout) {
   
   debugger;
   vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
+
+  if(vm.thumbnail.dataUrl =="data:," ){
+    location.reload(true);
+  }
 
    $scope.photoChanged = function(files){
       if (files != null) {
@@ -137,7 +142,7 @@ function eventoController($scope, $mdDialog,registarEventoServices, $timeout) {
     }
 
     
-    function functionUsuario(){
+    function functionResponsable(){
          if(vm.Usuario.length > 0){
            vm.mensajeUsuario ="";
          }
@@ -185,27 +190,18 @@ vm.mensajeDescripcion ="";
             return;
           }
           
-          
           if(vm.Usuario == undefined  || vm.Usuario  == ''){
             vm.mensajeUsuario = "Debes ingresar un dato válido para este campo";
             return;
           }
           
-          
-          
-          
           if(vm.Fechai >= new Date()){
-            vm.mensajeFechai = "La fecha debe ser menor a la fecha actual";
+            vm.mensajeFechai = "La fecha inicial del evento debe ser mayor a la fecha actual";
             return;
           }
 
-          if(vm.Fechaf >= new Date()){
-            vm.mensajeFechaf = "La fecha debe ser menor a la fecha actual";
-            return;
-          }
-
-          if(vm.Lugar == undefined  || vm.Lugar  == ''){
-            vm.mensajeLugar = "Debes ingresar un dato válido para este campo";
+          if(vm.Fechai > vm.Fechaf >  vm.Fechai){
+            vm.mensajeFechaf = "La fecha de finalización debe ser mayor o igual a la fecha inicial del evento";
             return;
           }
 
@@ -213,7 +209,11 @@ vm.mensajeDescripcion ="";
             vm.mensajeDescripcion = "Debes ingresar un dato válido para este campo";
             return;
           }
-             
+
+          if(vm.Lugar == undefined  || vm.Lugar  == ''){
+            vm.mensajeLugar = "Debes ingresar un dato válido para este campo";
+            return;
+          }             
     
           if(vm.Estado == undefined  || vm.Estado == '0'){
                vm.mensajeEstado = "Debes seleccionar una opción";
@@ -227,9 +227,9 @@ vm.mensajeDescripcion ="";
       var requestJson = {
                 "id" : vm.Id,
                 "nombre" : vm.Nombre,
-                "usuario": vm.Usuario ,
-                "fechai" : "",
-                "fechaf" : "",
+                "fechaI" : vm.Fechai,
+                "fechaF" : vm.Fechaf,
+                "idResponsable":vm.Usuario,
                 "lugar" : vm.Lugar,                 
                 "descripcion" : vm.Descripcion,
                 "estado" : vm.Estado,
@@ -238,24 +238,24 @@ vm.mensajeDescripcion ="";
          console.log(JSON.stringify(requestJson));
          jQuery(window).spin();       
          registarEventoServices.registrarEvento(requestJson).then(function(data){
-          jQuery(window).spin();
-          vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
-            if(data.resultado == "200") {     
+         jQuery(window).spin();
+         vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
+         if(data.resultado.codigoRespuesta == "200") {     
                    $mdDialog.show(
                    $mdDialog.alert()
                    .parent(angular.element(document.querySelector('#dialogContainer')))
                    .clickOutsideToClose(true)
                    .title('Registrar Evento')
-                   .textContent('Se registró la evento exitósamente.')
-                   .ariaLabel('Se registró la evento exitósamente.')
+                   .textContent('Se registró el evento exitósamente con el siguiente número: '+data.resultado.id)
+                   .ariaLabel()
                    .ok('Cerrar')                     
                   );
                   
                  vm.Id = "",
                  vm.Nombre = "",
                  vm.Usuario  = "",
-                 vm.Fechai = "",
-                 vm.Fechaf = "",
+                 vm.Fechai = new Date();
+                 vm.Fechaf = new Date();
                  vm.Lugar = "",                  
                  vm.Descripcion = "",
                  vm.Estado = "",
@@ -264,7 +264,7 @@ vm.mensajeDescripcion ="";
                 dataUrl: ''
                 };               
 
-            }else if(data.resultado.codigoRespuesta == "201"){
+            }else if(data.resultado.codigoRespuesta  == "201"){
                    $mdDialog.show(
                    $mdDialog.alert()
                    .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -274,14 +274,14 @@ vm.mensajeDescripcion ="";
                    .ariaLabel('Evento no registrado')
                    .ok('Cerrar')                     
                   );
-            }else if(data.resultado.codigoRespuesta == "202"){
+            }else if(data.resultado.codigoRespuesta  == "500"){
                    $mdDialog.show(
                    $mdDialog.alert()
                    .parent(angular.element(document.querySelector('#dialogContainer')))
                    .clickOutsideToClose(true)
                    .title('Registrar Evento')
-                   .textContent('el Evento ya se encuentra registrado.')
-                   .ariaLabel('el Evento ya se enuentra registrado.')
+                   .textContent('')
+                   .ariaLabel('Error en el servidor, intente de nuevo más tarde')
                    .ok('Cerrar')                     
                   );
             }           
@@ -372,8 +372,8 @@ vm.mensajeDescripcion ="";
                 vm.Id2 = "";
                 vm.Id = "";
                 vm.Nombre = "";                   
-                vm.Fechai = "";
-                vm.Fechaf = "";
+                vm.Fechai = new Date();
+                vm.Fechaf = new Date();
                 vm.Lugar = "";            
                 vm.Descripcion = "";
                 vm.Estado = "";
