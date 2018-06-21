@@ -14,7 +14,7 @@ self.eliminarEvento = eliminarEvento;
 
 function registrarEvento(auditJson){                
     var promesa = $q.defer();
-    $http.post(CONFIG.APIURL+"/eventos",auditJson)
+    $http.post(CONFIG.APIURL+"eventos",auditJson)
         .success(function(data){
             promesa.resolve({
                 resultado:data
@@ -29,12 +29,12 @@ function registrarEvento(auditJson){
     
 }
 
-function consultarEventoServices(auditJson){                
+function consultarEventoServices(id){                
     var promesa = $q.defer();
-    $http.post(CONFIG.APIURL+"/eventos",auditJson)
+    $http.get(CONFIG.APIURL+"eventos/"+id)
         .success(function(data){
             promesa.resolve({
-                resultado:data
+                resultado:data  
             })
         })
         .error(function(err){
@@ -48,7 +48,7 @@ function consultarEventoServices(auditJson){
 
 function actualizarEvento(auditJson){                
     var promesa = $q.defer();
-    $http.post(CONFIG.APIURL+"/eventos",auditJson)
+    $http.put(CONFIG.APIURL+"eventos",auditJson)
         .success(function(data){
             promesa.resolve({
                 resultado:data
@@ -64,9 +64,9 @@ function actualizarEvento(auditJson){
 }
 
 
- function eliminarEvento(auditJson){                
+ function eliminarEvento(id){                
     var promesa = $q.defer();
-    $http.post(CONFIG.APIURL+"/eventos",auditJson)
+    $http.delete(CONFIG.APIURL+"eventos/"+id)
         .success(function(data){
             promesa.resolve({
                 resultado:data

@@ -68,7 +68,7 @@ function eventoController($scope, $mdDialog,registarEventoServices, $timeout) {
    $scope.photoChanged = function(files){
       if (files != null) {
           debugger;
-          var file = files;
+          var file = files[0];
           vm.imagen = file.name 
         if (vm.fileReaderSupported && file.type.indexOf('image') > -1) {
             $timeout(function() {
@@ -200,7 +200,7 @@ vm.mensajeDescripcion ="";
             return;
           }
 
-          if(vm.Fechai > vm.Fechaf >  vm.Fechai){
+          if(vm.Fechai > vm.Fechaf){
             vm.mensajeFechaf = "La fecha de finalización debe ser mayor o igual a la fecha inicial del evento";
             return;
           }
@@ -223,7 +223,7 @@ vm.mensajeDescripcion ="";
 
             
 
-      var mes = vm.Fechai.getMonth()+1;  
+      //var mes = vm.Fechai.getMonth()+1;  
       var requestJson = {
                 "id" : vm.Id,
                 "nombre" : vm.Nombre,
@@ -305,17 +305,15 @@ vm.mensajeDescripcion ="";
       if(vm.Usuario == undefined  || vm.Usuario  == ''){
         vm.mensajeUsuario = "Debes ingresar un dato válido para este campo";
         return;
-      }
-      
-               
+      }              
       
       if(vm.Fechai >= new Date()){
-         vm.mensajeFechai= "La fecha debe ser menor a la fecha ";
-         return;
-       }
+        vm.mensajeFechai = "La fecha inicial del evento debe ser mayor a la fecha actual";
+        return;
+      }
 
-       if(vm.Fechaf >= new Date()){
-        vm.mensajeFechaf = "La fecha debe ser menor a la fecha ";
+      if(vm.Fechai > vm.Fechaf){
+        vm.mensajeFechaf = "La fecha de finalización debe ser mayor o igual a la fecha inicial del evento";
         return;
       }
 
@@ -327,34 +325,25 @@ vm.mensajeDescripcion ="";
       if(vm.Descripcion == undefined  || vm.Descripcion  == ''){
         vm.mensajeDescripcion = "Debes ingresar un dato válido para este campo";
         return;
-      }
+      } 
 
-             
-          
+      if(vm.Estado == undefined  || vm.Estado == '0'){
+            vm.mensajeEstado = "Debes seleccionar una opción";
+            return;
+      }          
 
-
-          if(vm.Estado == undefined  || vm.Estado == '0'){
-               vm.mensajeEstado = "Debes seleccionar una opción";
-                return;
-          }
-
-
-          
-
-       var mes = vm.fechaN.getMonth()+1; 
-      var requestJson = {
-                "id" : vm.Id,
-                "nombre" : vm.Nombre,
-                "usuario": vm.Usuario ,
-                "fechai" : vm.Fechai ,
-                "fechaf" : vm.Fechaf ,
-                "lugar" : vm.Lugar,
-                "descripcion" : vm.Descripcion,                    
-                
-                "estado" : vm.Estado,
-                
-                "imagen" : vm.thumbnail.dataUrl                   
-                }         
+       //var mes = vm.fechaN.getMonth()+1; 
+       var requestJson = {
+          "id" : vm.Id,
+          "nombre" : vm.Nombre,
+          "fechaI" : vm.Fechai,
+          "fechaF" : vm.Fechaf,
+          "idResponsable":vm.Usuario,
+          "lugar" : vm.Lugar,                 
+          "descripcion" : vm.Descripcion,
+          "estado" : vm.Estado,
+          "imagen" : vm.thumbnail.dataUrl                
+        }        
          jQuery(window).spin();       
          registarEventoServices.actualizarEvento(requestJson).then(function(data){
          jQuery(window).spin();
@@ -371,6 +360,7 @@ vm.mensajeDescripcion ="";
                   );
                 vm.Id2 = "";
                 vm.Id = "";
+                vm.Usuario = "";
                 vm.Nombre = "";                   
                 vm.Fechai = new Date();
                 vm.Fechaf = new Date();
@@ -404,26 +394,10 @@ vm.mensajeDescripcion ="";
         if(vm.Id2 == undefined  || vm.Id2  == ''){
                vm.mensajeId2 = "Debes ingresar un id para consultar";
                return;
-         }
-   
+         }   
 
-       var requestJson = {
-                 "id" : vm.Id2,
-                 
-                 "nombre" : vm.Nombre,
-                 "usuario": vm.Usuario ,
-                 "fechai" : vm.Fechai ,
-                 "fechaf" : vm.Fechaf ,
-                 "lugar" : vm.Lugar,
-                 "descripcion" : vm.Descripcion,                    
-                 
-                 "estado" : vm.Estado,
-                 
-      
-                "imagen" : vm.imagen                                        
-                }
-                jQuery(window).spin();
-         registarEventoServices.consultarEventoServices(requestJson).then(function(data){
+         jQuery(window).spin();
+         registarEventoServices.consultarEventoServices(vm.Id2).then(function(data){
                jQuery(window).spin();
             if(data.resultado.codigoRespuesta == "200") { 
                  $mdDialog.show(
@@ -438,10 +412,10 @@ vm.mensajeDescripcion ="";
                 vm.Id = vm.Id2;
                 vm.Nombre = data.resultado.nombre,
                 vm.Usuario  = data.resultado.idResponsable,
-                vm.Fechai = new Date(data.resultado.fechai),
-                vm.Fechaf = new Date(data.resultado.fechaf),
-                vm.Lugar = data.resultado.genero,                
-                vm.Descripcion = data.resultado.tamano,
+                vm.Fechai = new Date(data.resultado.fechaI),
+                vm.Fechaf = new Date(data.resultado.fechaF),
+                vm.Lugar = data.resultado.lugar,                
+                vm.Descripcion = data.resultado.descripcion,
                 vm.Estado = data.resultado.estado,
                
                 vm.thumbnail.dataUrl =  data.resultado.imagen,
@@ -455,7 +429,7 @@ vm.mensajeDescripcion ="";
                  vm.registrarDisabled = true;
                  vm.consultarDisabled = true; 
 
-            }else {
+            }else if(data.resultado.codigoRespuesta == "201") {
                   $mdDialog.show(
                    $mdDialog.alert()
                    .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -466,6 +440,16 @@ vm.mensajeDescripcion ="";
                    .ok('Cerrar')                     
                   );
 
+            }else if(data.resultado.codigoRespuesta == "500") {
+              $mdDialog.show(
+                $mdDialog.alert()
+                .parent(angular.element(document.querySelector('#dialogContainer')))
+                .clickOutsideToClose(true)
+                .title('Consultar Evento')
+                .textContent('Evento no consultado.')
+                .ariaLabel('Error en el servidor, intente de nuevo más tarde.')
+                .ok('Cerrar')                     
+               );
             }            
          });
     } 
@@ -473,20 +457,8 @@ vm.mensajeDescripcion ="";
 
 
     function eliminar(){
-       var requestJson = {
-                 "id" : vm.Id,
-                "nombre" : vm.Nombre,
-                "usuario": vm.Usuario ,
-                "fechai" : vm.Fechai,
-                "fechaf" : vm.Fechaf,
-                "lugar" : vm.Lugar,                
-                "descripcion" : vm.Descripcion,
-                "estado" : vm.Estado,
-                
-                "imagen" : vm.imagen                                         
-                }
          jQuery(window).spin();
-         registarEventoServices.eliminarEvento(requestJson).then(function(data){
+         registarEventoServices.eliminarEvento(vm.Id).then(function(data){
            jQuery(window).spin();
            vm.thumbnail.dataUrl = getBase64Image(document.getElementById("img"));
             if(data.resultado == "200") { 
@@ -501,13 +473,13 @@ vm.mensajeDescripcion ="";
                   );
                 
                 vm.Id = "";
-                vm.Nombre = "",                   
-                vm.Fechai = "",
-                vm.Fechaf = "",
-                vm.Lugar = "",              
-                vm.Descripcion = "",
-                vm.Estado = "",
-                
+                vm.Nombre = "";                   
+                vm.Fechai = new Date();
+                vm.Fechaf = new Date();
+                vm.Lugar = "";             
+                vm.Descripcion = "";
+                vm.Estado = "";
+                vm.Usuario = "";
 
                 vm.idDisabled = false;
                 vm.registrarDisabled = false;
@@ -515,7 +487,7 @@ vm.mensajeDescripcion ="";
                 vm.actualizarDisabled = true;
                 vm.eliminarDisabled = true; 
 
-            }else {
+            }else if(data.resultado == "201") {
                   $mdDialog.show(
                     $mdDialog.alert()
                    .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -526,7 +498,17 @@ vm.mensajeDescripcion ="";
                    .ok('Cerrar')                     
                   );
 
-            }            
+            } else if(data.resultado == "500") {
+              $mdDialog.show(
+                $mdDialog.alert()
+               .parent(angular.element(document.querySelector('#dialogContainer')))
+               .clickOutsideToClose(true)
+               .title('Eliminar Evento')
+               .textContent('Evento no eliminado.')
+               .ariaLabel('Error en el servidor, intentelo de nuevo más tarde.')
+               .ok('Cerrar')                     
+              );
+            }           
          });
     }    
 
